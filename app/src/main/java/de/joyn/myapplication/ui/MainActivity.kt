@@ -1,7 +1,8 @@
-package de.joyn.myapplication
+package de.joyn.myapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import de.joyn.myapplication.R
 
 class MainActivity : AppCompatActivity() {
 
