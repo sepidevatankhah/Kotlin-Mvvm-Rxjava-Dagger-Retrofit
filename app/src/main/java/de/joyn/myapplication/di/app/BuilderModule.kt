@@ -6,7 +6,8 @@ import de.joyn.myapplication.ui.photoDetail.PhotoDetailActivity
 import de.joyn.myapplication.ui.photoDetail.PhotoDetailModule
 import de.joyn.myapplication.ui.main.MainActivity
 import de.joyn.myapplication.ui.main.MainActivityModule
-import de.joyn.myapplication.ui.photoList.*
+import de.joyn.myapplication.ui.photoList.PhotoListActivity
+import de.joyn.myapplication.ui.photoList.PhotoListActivityModule
 
 
 @Module()

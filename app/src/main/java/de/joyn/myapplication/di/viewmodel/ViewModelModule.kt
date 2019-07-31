@@ -14,12 +14,17 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(clazz = PhotoListViewModel::class)
-    abstract fun bindFlowerListViewModel(viewModel: PhotoListViewModel): ViewModel
+    abstract fun bindPhotoListViewModel(viewModel: PhotoListViewModel): ViewModel
+
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(clazz = PhotoViewModel::class)
+//    abstract fun bindPhotoViewModel(viewModel: PhotoViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(clazz = PhotoDetailViewModel::class)
-    abstract fun bindFlowerDetailViewModel(viewModel: PhotoDetailViewModel): ViewModel
+    abstract fun bindPhotoDetailViewModel(viewModel: PhotoDetailViewModel): ViewModel
 
     @Binds
     @IntoMap

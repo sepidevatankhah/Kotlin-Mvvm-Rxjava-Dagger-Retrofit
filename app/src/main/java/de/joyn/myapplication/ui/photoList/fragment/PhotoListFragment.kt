@@ -1,5 +1,6 @@
-//package de.joyn.myapplication.ui.flowerList
+//package de.joyn.myapplication.ui.photoList.fragment
 //
+//import de.joyn.myapplication.ui.photoList.flowerViewholder.FlowerRecyclerView
 //import android.os.Bundle
 //import android.view.LayoutInflater
 //import android.view.View
@@ -7,12 +8,11 @@
 //import androidx.recyclerview.widget.GridLayoutManager
 //import de.joyn.myapplication.R
 //import de.joyn.myapplication.ui.base.BaseDaggerFragment
-//import de.joyn.myapplication.ui.flowerList.flowerViewholder.FlowerRecyclerView
 //import kotlinx.android.synthetic.main.activity_flower_list.*
 //import javax.inject.Inject
 //import javax.inject.Provider
 //
-//class FlowerListFragment : BaseDaggerFragment<PhotoListViewState, PhotoListViewModel>() {
+//class FlowerListFragment : BaseDaggerFragment<PhotoViewState, PhotoViewModel>() {
 //    @Inject
 //    lateinit var flowerAdapterProvider: Provider<FlowerRecyclerView>
 //    lateinit var flowerAdapter: FlowerRecyclerView
@@ -33,7 +33,7 @@
 //
 //    }
 //
-//    override fun handleState(state: PhotoListViewState) {
+//    override fun handleState(state: PhotoViewState) {
 //        flowerAdapter.submitList(state.flowerModels)
 //    }
 //}
