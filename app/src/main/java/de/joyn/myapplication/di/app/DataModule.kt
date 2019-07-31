@@ -16,7 +16,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -51,7 +50,7 @@ class DataModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-        @Named("isMock") isMock: Boolean,
+        //@Named("isMock") isMock: Boolean,
         connectivityManager: ConnectivityManager,
         @ForApplication context: Context
     ): OkHttpClient {

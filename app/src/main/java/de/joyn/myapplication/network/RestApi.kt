@@ -14,4 +14,5 @@ interface RestApi {
 
     @GET("api/?key=13173797-7e626eef5603a5f5f39b2369e&q=yellow+flowers&image_type=photo&pretty=true")
     fun getFlowers(): Single<BaseModel<Models.FlowerResponse>>
+
 }

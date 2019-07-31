@@ -8,7 +8,9 @@ import de.joyn.myapplication.data.extractor.NetworkJobExecutor
 import de.joyn.myapplication.di.scope.ForApplication
 import de.joyn.myapplication.domain.executer.PostExecutionThread
 import de.joyn.myapplication.domain.executer.UseCaseExecutor
+import de.joyn.myapplication.domain.repository.ConnectivityManager
 import de.joyn.myapplication.ui.executer.UiThreadExecutor
+import de.joyn.myapplication.util.ConnectivityManagerImp
 import javax.inject.Singleton
 
 @Module
@@ -27,4 +29,9 @@ class AppModule {
     @Provides
     @ForApplication
     fun provideContext(app: App): Context = app.applicationContext
+
+    @Provides
+    @Singleton
+    fun provideConnectivityManager(connectivityManagerImp: ConnectivityManagerImp)
+            : ConnectivityManager = connectivityManagerImp
 }

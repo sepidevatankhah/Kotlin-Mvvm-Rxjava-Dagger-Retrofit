@@ -42,7 +42,7 @@ abstract class BaseDaggerActivity<S : BaseViewState, VM : BaseViewModel<S>> : Da
 
 
     private fun startObserving() {
-        viewModel.stateLD.observe(this, Observer { state -> handleState(state) })
+        viewModel.stateLiveData.observe(this, Observer { state -> handleState(state) })
     }
 
     abstract fun handleState(state: S)

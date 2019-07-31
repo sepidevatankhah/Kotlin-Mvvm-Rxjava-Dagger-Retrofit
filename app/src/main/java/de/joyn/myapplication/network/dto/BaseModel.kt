@@ -2,8 +2,9 @@ package de.joyn.myapplication.network.dto
 
 import com.google.gson.annotations.SerializedName
 
-class BaseModel<R>(@SerializedName("meta") val meta: Meta,
-                   @SerializedName("response") val response: R)
+class BaseModel<R>(@SerializedName("totalHits") val totalHits: Int,
+                   @SerializedName("hits") val response: List<R>,
+                   @SerializedName("total") val total: Int)
 
 
-class Meta(@SerializedName("code") val code:Int)
+//class Meta(@SerializedName("code") val code:Int)

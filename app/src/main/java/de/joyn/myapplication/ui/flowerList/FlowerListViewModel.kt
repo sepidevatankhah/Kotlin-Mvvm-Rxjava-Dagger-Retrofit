@@ -1,19 +1,26 @@
 package de.joyn.myapplication.ui.flowerList
 
+import de.joyn.myapplication.domain.entity.FlowerModel
+import de.joyn.myapplication.domain.interactor.GetFlowerUseCase
 import de.joyn.myapplication.ui.base.BaseViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
-class FlowerListViewModel @Inject constructor() :
+class FlowerListViewModel @Inject constructor(val getFlowerUseCase: GetFlowerUseCase) :
     BaseViewModel<FlowerListViewState>() {
 
-//
-//    // Internally, we use a MutableLiveData, because we will be updating the List of Flowers
-//    // with new values
-//    private val _properties = MutableLiveData<List<Models.FlowerResponse>>()
-//
-//    // The external LiveData interface to the property is immutable, so only this class can modify
-//    val properties: LiveData<List<Models.FlowerResponse>>
-//        get() = _properties
+    init {
+        getFlowers()
+    }
 
+    private fun getFlowers(){
+        val disposable = getFlowerUseCase.execute(FlowerModel()).subscribe({ response->
+            Timber.i("emitter size is"+response.size)
+            stateLiveData.postValue(FlowerListViewState(response))
+        },{t: Throwable? ->
+            Timber.e(t)
+        })
+        compositeDisposable.add(disposable)
+    }
 
 }
