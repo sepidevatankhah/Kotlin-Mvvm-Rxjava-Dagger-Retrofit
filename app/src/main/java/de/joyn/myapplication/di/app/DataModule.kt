@@ -5,8 +5,10 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import de.joyn.myapplication.data.repository.RepositoryImp
 import de.joyn.myapplication.di.scope.ForApplication
 import de.joyn.myapplication.domain.repository.ConnectivityManager
+import de.joyn.myapplication.domain.repository.Repository
 import de.joyn.myapplication.network.RestApi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -18,7 +20,13 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class DataModule {
+
+    @Singleton
+    @Provides
+    fun provideRepository(api: RestApi): Repository {
+        return RepositoryImp(api)
+    }
 
     @Singleton
     @Provides
@@ -42,9 +50,10 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(@Named("isMock") isMock: Boolean,
-                            connectivityManager: ConnectivityManager,
-                            @ForApplication context: Context
+    fun provideOkHttpClient(
+        @Named("isMock") isMock: Boolean,
+        connectivityManager: ConnectivityManager,
+        @ForApplication context: Context
     ): OkHttpClient {
         val cacheSize = (5 * 1024 * 1024).toLong()
 
@@ -84,7 +93,10 @@ class NetworkModule {
                 *  The 'max-stale' attribute is responsible for this behavior.
                 *  The 'only-if-cached' attribute indicates to not retrieve new data; fetch the cache only instead.
                 */
-                    request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
+                    request.newBuilder().header(
+                        "Cache-Control",
+                        "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7
+                    ).build()
                 // End of if-else statement
 
                 // Add the modified request to the chain.
