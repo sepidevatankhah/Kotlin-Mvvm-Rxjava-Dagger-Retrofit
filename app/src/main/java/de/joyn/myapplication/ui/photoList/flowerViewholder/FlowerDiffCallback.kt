@@ -1,4 +1,4 @@
-package de.joyn.myapplication.ui.flowerList.flowerViewholder
+package de.joyn.myapplication.ui.photoList.flowerViewholder
 
 import androidx.recyclerview.widget.DiffUtil
 import de.joyn.myapplication.network.dto.Models

@@ -1,4 +1,4 @@
-package de.joyn.myapplication.ui.flowerList
+package de.joyn.myapplication.ui.photoList
 
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.joyn.myapplication.network.dto.Models
 
-class FlowerAdapter ( val onClickListener: OnClickListener ) :
-    ListAdapter<Models.FlowerResponse, FlowerAdapter.ViewHolder>(DiffCallback) {
+class PhotoAdapter (val onClickListener: OnClickListener ) :
+    ListAdapter<Models.FlowerResponse, PhotoAdapter.ViewHolder>(DiffCallback) {
 
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

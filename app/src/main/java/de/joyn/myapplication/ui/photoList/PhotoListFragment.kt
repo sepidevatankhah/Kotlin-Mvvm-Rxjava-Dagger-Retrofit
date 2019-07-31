@@ -12,7 +12,7 @@
 //import javax.inject.Inject
 //import javax.inject.Provider
 //
-//class FlowerListFragment : BaseDaggerFragment<FlowerListViewState, FlowerListViewModel>() {
+//class FlowerListFragment : BaseDaggerFragment<PhotoListViewState, PhotoListViewModel>() {
 //    @Inject
 //    lateinit var flowerAdapterProvider: Provider<FlowerRecyclerView>
 //    lateinit var flowerAdapter: FlowerRecyclerView
@@ -33,7 +33,7 @@
 //
 //    }
 //
-//    override fun handleState(state: FlowerListViewState) {
+//    override fun handleState(state: PhotoListViewState) {
 //        flowerAdapter.submitList(state.flowerModels)
 //    }
 //}

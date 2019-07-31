@@ -2,18 +2,23 @@ package de.joyn.myapplication.di.app
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import de.joyn.myapplication.ui.photoDetail.PhotoDetailActivity
+import de.joyn.myapplication.ui.photoDetail.PhotoDetailModule
 import de.joyn.myapplication.ui.main.MainActivity
 import de.joyn.myapplication.ui.main.MainActivityModule
-import de.joyn.myapplication.ui.flowerList.*
+import de.joyn.myapplication.ui.photoList.*
 
 
 @Module()
 abstract class BuilderModule {
 
-    @ContributesAndroidInjector(modules = [FlowerListActivityModule::class])
-    abstract fun bindFlowerListActivity(): FlowerListActivity
+    @ContributesAndroidInjector(modules = [PhotoListActivityModule::class])
+    abstract fun bindFlowerListActivity(): PhotoListActivity
 
-//    @ContributesAndroidInjector(modules = [FlowerFragmentModule::class])
+    @ContributesAndroidInjector(modules = [PhotoDetailModule::class])
+    abstract fun bindFlowerDetailActivity(): PhotoDetailActivity
+
+//    @ContributesAndroidInjector(modules = [PhotoFragmentModule::class])
 //    abstract fun bindFlowerListFragment(): FlowerListFragment
 
 

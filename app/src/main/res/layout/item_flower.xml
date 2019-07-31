@@ -1,23 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="wrap_content"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/flower_container">
+                                                   android:id="@+id/flower_container">
 
     <ImageView
             android:id="@+id/img_flower"
-            android:layout_width="197dp"
-            android:layout_height="159dp"
-            android:layout_marginTop="28dp"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
-            android:padding="2dp"
-            android:scaleType="centerInside"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.219"
+            android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            tools:src="@drawable/ic_launcher_background"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/imgView"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            app:srcCompat="@android:drawable/ic_menu_view"
+            android:id="@+id/imgView"
+            app:layout_constraintStart_toEndOf="@+id/img_flower"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/txtView"
+            android:contentDescription="@string/views"
+            app:layout_constraintBottom_toBottomOf="@+id/img_flower" android:layout_marginBottom="8dp"/>
+    <TextView
+            tools:text="2500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtView"
+            app:layout_constraintStart_toEndOf="@+id/imgView" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/imgDownload"
+            app:layout_constraintBottom_toBottomOf="@+id/imgView"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cloud_download"
+            android:id="@+id/imgDownload"
+            app:layout_constraintStart_toEndOf="@+id/txtView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/txtDownload"
+            android:contentDescription="@string/downloads"
+            app:layout_constraintBottom_toBottomOf="@+id/txtView"/>
+    <TextView
+            tools:text="1390"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtDownload"
+            app:layout_constraintStart_toEndOf="@+id/imgDownload" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/imgLike"
+            app:layout_constraintBottom_toBottomOf="@+id/imgDownload"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/round_thumb_up_black_18dp"
+            android:id="@+id/imgLike"
+            app:layout_constraintStart_toEndOf="@+id/txtDownload"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/txtLikes" android:contentDescription="@string/likes"
+            app:layout_constraintBottom_toBottomOf="@+id/txtDownload"/>
+    <TextView
+            tools:text="23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtLikes"
+            app:layout_constraintStart_toEndOf="@+id/imgLike"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/imgLike"/>
+    <TextView
+            android:textColor="#de000000"
+            android:textSize="15sp"
+            tools:text="Sepideh Vatankhah"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/txtUserName"
+            app:layout_constraintStart_toEndOf="@+id/img_flower"
+            android:layout_marginStart="16dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/imgView" app:layout_constraintVertical_bias="0.82"/>
+
+
+    <!--tools:src="@tools:sample/backgrounds/scenic"-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

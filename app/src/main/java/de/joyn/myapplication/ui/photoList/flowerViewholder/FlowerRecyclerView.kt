@@ -1,4 +1,4 @@
-package de.joyn.myapplication.ui.flowerList.flowerViewholder
+package de.joyn.myapplication.ui.photoList.flowerViewholder
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter

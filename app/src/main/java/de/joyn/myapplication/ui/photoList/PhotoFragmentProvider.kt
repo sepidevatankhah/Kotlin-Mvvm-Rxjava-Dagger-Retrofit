@@ -7,6 +7,6 @@
 //@Module
 //abstract class FlowerFragmentProvider {
 //
-//    @ContributesAndroidInjector(modules = [FlowerFragmentModule::class])
+//    @ContributesAndroidInjector(modules = [PhotoFragmentModule::class])
 //    internal abstract fun provideFlowerFragmentFactory(): FlowerListFragment
 //}

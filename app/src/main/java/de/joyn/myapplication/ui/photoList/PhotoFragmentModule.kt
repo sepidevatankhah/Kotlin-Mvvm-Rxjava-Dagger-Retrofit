@@ -1,16 +1,10 @@
-package de.joyn.myapplication.ui.flowerList
+package de.joyn.myapplication.ui.photoList
 
 import dagger.Module
-import dagger.multibindings.IntKey
-import dagger.multibindings.IntoMap
-import dagger.Binds
-import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.Provides
-
 
 
 @Module
-class FlowerFragmentModule {
+class PhotoFragmentModule {
 
 //    @Provides
 //    fun providerLayoutManager(fragment: LeaderBoardFragment): LinearLayoutManager {

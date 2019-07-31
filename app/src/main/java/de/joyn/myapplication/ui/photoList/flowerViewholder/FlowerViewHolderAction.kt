@@ -1,7 +1,6 @@
-package de.joyn.myapplication.ui.flowerList.flowerViewholder
+package de.joyn.myapplication.ui.photoList.flowerViewholder
 
 import de.joyn.myapplication.ui.base.recyclerview.BaseViewHolderAction
-import java.text.FieldPosition
 
 class FlowerViewHolderAction(adapterPosition: Int, var state: Int) : BaseViewHolderAction(adapterPosition) {
     companion object {
