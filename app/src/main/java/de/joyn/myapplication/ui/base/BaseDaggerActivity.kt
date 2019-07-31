@@ -1,10 +1,12 @@
 package de.joyn.myapplication.ui.base
 
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerAppCompatActivity
 import de.joyn.myapplication.di.viewmodel.ViewModelFactory
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 abstract class BaseDaggerActivity<S : BaseViewState, VM : BaseViewModel<S>> : DaggerAppCompatActivity() {
@@ -12,6 +14,8 @@ abstract class BaseDaggerActivity<S : BaseViewState, VM : BaseViewModel<S>> : Da
     @Inject
     @JvmField
     var viewModelFactory: ViewModelFactory? = null
+    val compositDesposable: CompositeDisposable = CompositeDisposable()
+
 
     protected lateinit var viewModel: VM
 
@@ -20,8 +24,20 @@ abstract class BaseDaggerActivity<S : BaseViewState, VM : BaseViewModel<S>> : Da
         startObserving()
     }
 
+    override fun onDestroy() {
+        compositDesposable.clear()
+        super.onDestroy()
+    }
+
+
     fun createViewModel(clazz: Class<VM>) {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(clazz)
+    }
+
+
+    fun showToast(@StringRes string: Int) {
+        if (string != 0)
+            Toast.makeText(applicationContext, getString(string), Toast.LENGTH_LONG).show()
     }
 
 
