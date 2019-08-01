@@ -10,10 +10,10 @@ class PhotoListViewModel @Inject constructor(val getFlowerUseCase: GetFlowerUseC
     BaseViewModel<PhotoListViewState>() {
 
     init {
-        getFlowers()
+        getPhotos("flowers")
     }
 
-    private fun getFlowers(){
+    private fun getPhotos(filter: String){
         val disposable = getFlowerUseCase.execute(FlowerModel()).subscribe({ response->
             Timber.i("emitter size is"+response.size)
             stateLiveData.postValue(PhotoListViewState(response))
@@ -22,5 +22,8 @@ class PhotoListViewModel @Inject constructor(val getFlowerUseCase: GetFlowerUseC
         })
         compositeDisposable.add(disposable)
     }
+
+//    fun updateFilter(filter: String) {
+//    }
 
 }

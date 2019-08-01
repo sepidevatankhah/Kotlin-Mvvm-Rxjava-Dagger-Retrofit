@@ -3,7 +3,7 @@ package de.joyn.myapplication.ui.photoList
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.joyn.myapplication.R
@@ -11,10 +11,12 @@ import de.joyn.myapplication.ui.base.BaseDaggerActivity
 import de.joyn.myapplication.ui.photoDetail.PhotoDetailActivity
 import de.joyn.myapplication.ui.photoList.flowerViewholder.PhotoRecyclerView
 import de.joyn.myapplication.util.EndlessRecyclerViewScrollListener
-import kotlinx.android.synthetic.main.activity_flower_list.*
+import kotlinx.android.synthetic.main.activity_photo_list.*
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
+
+
 
 
 class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewModel>() {
@@ -25,9 +27,10 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_flower_list)
+        setContentView(R.layout.activity_photo_list)
         createViewModel(PhotoListViewModel::class.java)
         initRecyclerView()
+
     }
 
     private fun initRecyclerView() {
@@ -66,8 +69,25 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
     /**
      * Inflates the overflow menu that contains filtering options.
      */
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.overflow_menu, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.search_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    /**
+     * Updates the filter in the [OverviewViewModel] when the menu items are selected from the
+     * overflow menu.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
+//            when (item.itemId) {
+//                R.id.show_rent_menu -> MarsApiFilter.SHOW_RENT
+//                R.id.show_buy_menu -> MarsApiFilter.SHOW_BUY
+//                else -> MarsApiFilter.SHOW_ALL
+//            }
+
+        return true
+    }
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class PhotoViewHolderFactory @Inject constructor() : ViewHolderFactory<PhotoViewHolder> {
     override fun create(parent: ViewGroup): PhotoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_flower, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_photo, parent, false)
         return PhotoViewHolder(view, PhotoViewModel())
     }
 }

@@ -12,7 +12,7 @@ import de.joyn.myapplication.R
 import de.joyn.myapplication.network.dto.Models
 import de.joyn.myapplication.ui.base.recyclerview.BaseViewHolder
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.item_flower.view.*
+import kotlinx.android.synthetic.main.item_photo.view.*
 
 class PhotoViewHolder(itemView: View, viewModel: PhotoViewModel) :
     BaseViewHolder<PhotoViewHolderAction, Models.FlowerResponse, PhotoViewModel>(itemView, viewModel) {

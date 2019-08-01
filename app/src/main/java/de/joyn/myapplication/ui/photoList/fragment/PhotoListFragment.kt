@@ -7,7 +7,7 @@ package de.joyn.myapplication.ui.photoList.fragment
 //
 //
 //    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//        val view = inflater.inflate(R.layout.activity_flower_list,container,false)
+//        val view = inflater.inflate(R.layout.activity_photo_list,container,false)
 //
 //        initRecyclerView()
 //        return view.rootView

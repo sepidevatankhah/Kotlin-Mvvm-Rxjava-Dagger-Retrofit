@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Pixabay</string>
     <string name="views">views</string>
     <string name="downloads">downloads</string>
     <string name="likes">likes</string>
