@@ -1,9 +1,9 @@
-//package de.joyn.myapplication.ui.flowerList
-//
-//
-//import dagger.Module
-//import dagger.android.ContributesAndroidInjector
-//
+package de.joyn.myapplication.ui.flowerList
+
+
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
+
 //@Module
 //abstract class FlowerFragmentProvider {
 //

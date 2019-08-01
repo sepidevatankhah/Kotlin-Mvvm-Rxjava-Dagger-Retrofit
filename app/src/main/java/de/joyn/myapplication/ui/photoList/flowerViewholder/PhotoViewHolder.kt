@@ -14,8 +14,8 @@ import de.joyn.myapplication.ui.base.recyclerview.BaseViewHolder
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_flower.view.*
 
-class FlowerViewHolder(itemView: View, viewModel: FlowerViewModel) :
-    BaseViewHolder<FlowerViewHolderAction, Models.FlowerResponse, FlowerViewModel>(itemView, viewModel) {
+class PhotoViewHolder(itemView: View, viewModel: PhotoViewModel) :
+    BaseViewHolder<PhotoViewHolderAction, Models.FlowerResponse, PhotoViewModel>(itemView, viewModel) {
 
     private val imgPreviewUrl: ImageView by lazy { itemView.img_flower }
     private val txtLikes: TextView by lazy { itemView.txtLikes }
@@ -46,9 +46,9 @@ class FlowerViewHolder(itemView: View, viewModel: FlowerViewModel) :
 //        }
     }
 
-    override fun itemOnClick(actionSubject: PublishSubject<FlowerViewHolderAction>) {
+    override fun itemOnClick(actionSubject: PublishSubject<PhotoViewHolderAction> , currentRowData : Models.FlowerResponse? ) {
         RxView.clicks(itemView.findViewById(R.id.flower_container))
-            .map { o -> FlowerViewHolderAction.createSelectAction(adapterPosition) }
+            .map { o -> PhotoViewHolderAction.createSelectAction(adapterPosition , currentRowData ) }
             .repeat()
             .subscribe(actionSubject)
     }

@@ -6,9 +6,9 @@ import de.joyn.myapplication.R
 import de.joyn.myapplication.ui.base.recyclerview.ViewHolderFactory
 import javax.inject.Inject
 
-class FlowerViewHolderFactory @Inject constructor() : ViewHolderFactory<FlowerViewHolder> {
-    override fun create(parent: ViewGroup): FlowerViewHolder {
+class PhotoViewHolderFactory @Inject constructor() : ViewHolderFactory<PhotoViewHolder> {
+    override fun create(parent: ViewGroup): PhotoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_flower, parent, false)
-        return FlowerViewHolder(view, FlowerViewModel())
+        return PhotoViewHolder(view, PhotoViewModel())
     }
 }

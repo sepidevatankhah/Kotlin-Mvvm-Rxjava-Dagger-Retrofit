@@ -9,5 +9,5 @@ constructor(itemView: View, val vm: ViewModel)
     : RecyclerView.ViewHolder(itemView) {
     abstract fun bind()
 
-    abstract fun itemOnClick(actionSubject: PublishSubject<VHAction>)
+    abstract fun itemOnClick(actionSubject: PublishSubject<VHAction> , currentRowData : Model?)
 }

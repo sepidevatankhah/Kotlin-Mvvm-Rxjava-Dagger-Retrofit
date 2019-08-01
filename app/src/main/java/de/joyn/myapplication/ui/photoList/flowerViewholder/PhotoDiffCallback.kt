@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import de.joyn.myapplication.network.dto.Models
 import javax.inject.Inject
 
-class FlowerDiffCallback
+class PhotoDiffCallback
 @Inject constructor() : DiffUtil.ItemCallback<Models.FlowerResponse>() {
     override fun areItemsTheSame(oldItem: Models.FlowerResponse, newItem: Models.FlowerResponse): Boolean =
         oldItem.id == newItem.id
