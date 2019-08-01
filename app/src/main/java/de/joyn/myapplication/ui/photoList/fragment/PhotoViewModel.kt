@@ -1,12 +1,6 @@
 package de.joyn.myapplication.ui.photoList.fragment
 
-import de.joyn.myapplication.domain.entity.FlowerModel
-import de.joyn.myapplication.domain.interactor.GetFlowerUseCase
-import de.joyn.myapplication.ui.base.BaseViewModel
-import timber.log.Timber
-import javax.inject.Inject
-
-//class PhotoViewModel @Inject constructor(val getFlowerUseCase: GetFlowerUseCase) :
+//class PhotoViewModel @Inject constructor(val getFlowerUseCase: GetPhotoUseCase) :
 //    BaseViewModel<PhotoViewState>() {
 //
 //    init {

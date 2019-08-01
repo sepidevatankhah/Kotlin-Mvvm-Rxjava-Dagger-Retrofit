@@ -9,13 +9,13 @@ import de.joyn.myapplication.network.dto.Models
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GetFlowerUseCase @Inject
+class GetPhotoUseCase @Inject
 constructor(
     useCaseExecutor: UseCaseExecutor,
     postExecutionThread: PostExecutionThread,
     repository: Repository
-) : SingleUseCase<List<Models.FlowerResponse>, FlowerModel>(useCaseExecutor, postExecutionThread, repository) {
-    override fun interact(params: FlowerModel?): Single<List<Models.FlowerResponse>> {
-        return repository.getFlowerUseCase("")
+) : SingleUseCase<List<Models.FlowerResponse>, String?>(useCaseExecutor, postExecutionThread, repository) {
+    override fun interact(params: String?): Single<List<Models.FlowerResponse>> {
+        return repository.getFlowerUseCase(params)
     }
 }

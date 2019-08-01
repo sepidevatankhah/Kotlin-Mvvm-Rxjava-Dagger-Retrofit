@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface Repository {
 
-    fun getFlowerUseCase(ll:String): Single<List<Models.FlowerResponse>>
+    fun getFlowerUseCase(query:String?): Single<List<Models.FlowerResponse>>
 }

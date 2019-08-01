@@ -10,9 +10,13 @@ interface RestApi {
 
     companion object {
         val BASE_URL = "https://pixabay.com/"
+        val API_KEY ="13173797-7e626eef5603a5f5f39b2369e"
+
     }
 
-    @GET("api/?key=13173797-7e626eef5603a5f5f39b2369e&q=yellow+flowers&image_type=photo&pretty=true")
-    fun getFlowers(): Single<BaseModel<Models.FlowerResponse>>
+    //@GET("api/?key=13173797-7e626eef5603a5f5f39b2369e&q=yellow+flowers&image_type=photo&pretty=true")
+
+    @GET("api/?key=13173797-7e626eef5603a5f5f39b2369e")
+    fun getFlowers(@Query("q") query:String? = "flowers"): Single<BaseModel<Models.FlowerResponse>>
 
 }

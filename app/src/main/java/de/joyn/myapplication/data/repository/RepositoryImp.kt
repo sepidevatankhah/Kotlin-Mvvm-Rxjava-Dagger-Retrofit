@@ -8,9 +8,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class RepositoryImp @Inject constructor(private val restApi: RestApi) : Repository {
-    override fun getFlowerUseCase(ll: String): Single<List<Models.FlowerResponse>> {
+    override fun getFlowerUseCase(query: String?): Single<List<Models.FlowerResponse>> {
         return Single.create { emitter ->
-            restApi.getFlowers().subscribe({ response ->
+            restApi.getFlowers(query).subscribe({ response ->
                 Timber.d("response : " + response.response.size)
                 emitter.onSuccess(response.response)
             }, {

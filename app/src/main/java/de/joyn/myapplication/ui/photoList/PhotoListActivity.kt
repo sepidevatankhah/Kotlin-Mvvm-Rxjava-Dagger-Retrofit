@@ -15,11 +15,13 @@ import kotlinx.android.synthetic.main.activity_photo_list.*
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
+import android.app.SearchManager
+import android.content.Context
+import android.widget.SearchView
 
 
+class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewModel>(), SearchView.OnQueryTextListener {
 
-
-class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewModel>() {
 
     @Inject
     lateinit var flowerAdapterProvider: Provider<PhotoRecyclerView>
@@ -30,7 +32,6 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
         setContentView(R.layout.activity_photo_list)
         createViewModel(PhotoListViewModel::class.java)
         initRecyclerView()
-
     }
 
     private fun initRecyclerView() {
@@ -39,11 +40,11 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
         var gridLayoutManager = GridLayoutManager(this, 1)
         recyclerView.layoutManager = gridLayoutManager
 
-        recyclerView.addOnScrollListener(object : EndlessRecyclerViewScrollListener(gridLayoutManager) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                //todo load more
-            }
-        })
+//        recyclerView.addOnScrollListener(object : EndlessRecyclerViewScrollListener(gridLayoutManager) {
+//            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+//                //todo load more
+//            }
+//        })
         val disposable = flowerAdapter.mClickPS
             .subscribe { action ->
                 Timber.i("clicked-- ${action.adapterPosition}")
@@ -67,27 +68,35 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
     }
 
     /**
-     * Inflates the overflow menu that contains filtering options.
+     * Inflates the search menu that contains filtering options.
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.search_menu, menu)
+
+        // Get the SearchView and set the searchable configuration
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu!!.findItem(R.id.app_bar_search).actionView as SearchView).apply {
+            // Assumes current activity is the searchable activity
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+            isSubmitButtonEnabled = true
+        }.setOnQueryTextListener(this)
+
         return super.onCreateOptionsMenu(menu)
     }
 
-    /**
-     * Updates the filter in the [OverviewViewModel] when the menu items are selected from the
-     * overflow menu.
-     */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
+    override fun onQueryTextSubmit(query: String): Boolean {
+        return false
+    }
 
-//            when (item.itemId) {
-//                R.id.show_rent_menu -> MarsApiFilter.SHOW_RENT
-//                R.id.show_buy_menu -> MarsApiFilter.SHOW_BUY
-//                else -> MarsApiFilter.SHOW_ALL
-//            }
-
+    override fun onQueryTextChange(newText: String?): Boolean {
+        Timber.d("query : %s", newText)
+        if (newText!!.length >= 3)
+            viewModel.getPhotos(newText)
         return true
     }
+
+
 }
