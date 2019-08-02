@@ -5,12 +5,14 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import de.joyn.myapplication.BuildConfig
 import de.joyn.myapplication.data.repository.RepositoryImp
 import de.joyn.myapplication.di.scope.ForApplication
 import de.joyn.myapplication.domain.repository.ConnectivityManager
 import de.joyn.myapplication.domain.repository.Repository
 import de.joyn.myapplication.network.RestApi
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -42,6 +44,7 @@ class DataModule {
             .client(okHttpClient)
             .build()
 
+
     @Singleton
     @Provides
     fun provideGson(): Gson = GsonBuilder().setLenient().create()
@@ -69,6 +72,12 @@ class DataModule {
 
                 // Get the request from the chain.
                 var request = chain.request()
+                val url = request.url().newBuilder()
+                    .addQueryParameter("key", RestApi.API_KEY)
+                    .build()
+                request = request.newBuilder()
+                    .url(url)
+                    .build()
 
                 /*
                 *  Leveraging the advantage of using Kotlin,
