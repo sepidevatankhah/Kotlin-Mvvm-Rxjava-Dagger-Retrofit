@@ -20,7 +20,7 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="26dp"
-            app:srcCompat="@drawable/baseline_cloud_download_24"
+            app:srcCompat="@drawable/round_remove_red_eye_24"
             android:id="@+id/imgView"
             app:layout_constraintStart_toEndOf="@+id/img_flower"
             android:layout_marginStart="8dp"
@@ -58,7 +58,7 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/baseline_cloud_download_24"
+            app:srcCompat="@drawable/round_thumb_up_24"
             android:id="@+id/imgLike"
             android:contentDescription="@string/likes"
             app:layout_constraintStart_toStartOf="@+id/imgView"

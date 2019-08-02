@@ -1,6 +1,5 @@
 package de.joyn.myapplication.domain.interactor
 
-import de.joyn.myapplication.domain.entity.FlowerModel
 import de.joyn.myapplication.domain.executer.PostExecutionThread
 import de.joyn.myapplication.domain.executer.UseCaseExecutor
 import de.joyn.myapplication.domain.interactor.base.SingleUseCase

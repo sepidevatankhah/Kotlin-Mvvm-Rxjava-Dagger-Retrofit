@@ -12,12 +12,12 @@
         <ImageView
                 android:id="@+id/imgLargePhoto"
                 android:layout_width="0dp"
-                android:layout_height="266dp"
-                android:scaleType="centerInside"
+                android:layout_height="400dp"
+                android:scaleType="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                tools:src="@tools:sample/backgrounds/scenic"/>
 
         <TextView
                 android:id="@+id/txtUserName"

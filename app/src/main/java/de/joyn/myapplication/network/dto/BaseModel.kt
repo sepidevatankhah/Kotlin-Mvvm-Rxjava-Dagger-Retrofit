@@ -6,5 +6,3 @@ class BaseModel<R>(@SerializedName("totalHits") val totalHits: Int,
                    @SerializedName("hits") val response: List<R>,
                    @SerializedName("total") val total: Int)
 
-
-//class Meta(@SerializedName("code") val code:Int)

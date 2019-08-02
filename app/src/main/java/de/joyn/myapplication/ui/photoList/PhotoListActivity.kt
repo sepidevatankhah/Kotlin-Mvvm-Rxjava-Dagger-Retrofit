@@ -3,14 +3,11 @@ package de.joyn.myapplication.ui.photoList
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import de.joyn.myapplication.R
 import de.joyn.myapplication.ui.base.BaseDaggerActivity
 import de.joyn.myapplication.ui.photoDetail.PhotoDetailActivity
-import de.joyn.myapplication.ui.photoList.flowerViewholder.PhotoRecyclerView
-import de.joyn.myapplication.util.EndlessRecyclerViewScrollListener
+import de.joyn.myapplication.ui.photoList.photoViewholder.PhotoRecyclerView
 import kotlinx.android.synthetic.main.activity_photo_list.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -80,6 +77,7 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
             // Assumes current activity is the searchable activity
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
             setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+            //text = "flowers"
             isSubmitButtonEnabled = true
         }.setOnQueryTextListener(this)
 
@@ -93,7 +91,7 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
 
     override fun onQueryTextChange(newText: String?): Boolean {
         Timber.d("query : %s", newText)
-        if (newText!!.length >= 3)
+        if (newText!!.trim().replace(" ","").length >= 3)
             viewModel.getPhotos(newText)
         return true
     }

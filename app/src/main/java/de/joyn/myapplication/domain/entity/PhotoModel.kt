@@ -1,6 +1,6 @@
 package de.joyn.myapplication.domain.entity
 
-data class FlowerModel(
+data class PhotoModel(
                        val query : String? = "flowers",
                        val id: String?="",
                        val userName: String?="",

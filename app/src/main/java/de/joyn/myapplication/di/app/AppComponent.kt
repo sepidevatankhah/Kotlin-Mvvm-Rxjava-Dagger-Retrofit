@@ -9,14 +9,15 @@ import de.joyn.myapplication.di.viewmodel.ViewModelModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class,
-    AndroidSupportInjectionModule::class,
-    BuilderModule::class, ViewModelModule::class,
-    DataModule::class
-])
+@Component(
+    modules = [AppModule::class,
+        AndroidSupportInjectionModule::class,
+        BuilderModule::class, ViewModelModule::class,
+        DataModule::class
+    ]
+)
 interface AppComponent : AndroidInjector<App> {
     @Component.Builder
-     //abstract class Builder : AndroidInjector.Builder<App>()
     interface Builder {
         @BindsInstance
         fun application(application: App): Builder

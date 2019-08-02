@@ -50,7 +50,6 @@ class DataModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-        //@Named("isMock") isMock: Boolean,
         connectivityManager: ConnectivityManager,
         @ForApplication context: Context
     ): OkHttpClient {
@@ -101,11 +100,7 @@ class DataModule {
                 // Add the modified request to the chain.
                 chain.proceed(request)
             }
-//        if (isMock) {
-//            val logging = HttpLoggingInterceptor()
-//            logging.level = HttpLoggingInterceptor.Level.BODY
-//            builder.addNetworkInterceptor(logging)
-//        }
+
 
         return builder.build()
     }

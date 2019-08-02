@@ -7,6 +7,8 @@ import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import de.joyn.myapplication.RxImmediateSchedulerRule
+import de.joyn.myapplication.domain.executer.PostExecutionThread
+import de.joyn.myapplication.domain.executer.UseCaseExecutor
 import de.joyn.myapplication.domain.interactor.GetPhotoUseCase
 import de.joyn.myapplication.domain.repository.Repository
 import de.joyn.myapplication.network.dto.Models
@@ -14,11 +16,17 @@ import io.reactivex.Single
 import org.junit.*
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnit
+import org.junit.Rule
+
+
 
 //class PhotoListViewModelTest@Inject constructor(private val getFlowerUseCase: GetPhotoUseCase) :
 //    BaseViewModel<PhotoListViewState>() {
-class PhotoListViewModelTest  {
+class PhotoListViewModelTest {
 
+    @Rule
+    var mockitoRule = MockitoJUnit.rule()
 
     @Rule
     @JvmField
@@ -33,19 +41,21 @@ class PhotoListViewModelTest  {
 
     @Mock
     lateinit var mockDataRepository: Repository
+    lateinit var postExecutionThread: PostExecutionThread
+    lateinit var useCaseExecutor: UseCaseExecutor
     @Mock
     lateinit var mockPhotoUseCase: GetPhotoUseCase
 
 
     lateinit var myViewModel: PhotoListViewModel
-    lateinit var flowerResult : List<Models.FlowerResponse>
-
+    lateinit var flowerResult: List<Models.FlowerResponse>
 
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         myViewModel = PhotoListViewModel(mockPhotoUseCase)
+        mockPhotoUseCase = GetPhotoUseCase(useCaseExecutor, postExecutionThread, mockDataRepository)
     }
 
     @Test

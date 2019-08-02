@@ -10,16 +10,12 @@ import de.joyn.myapplication.ui.base.BaseDaggerActivity
 import kotlinx.android.synthetic.main.activity_photo.*
 import timber.log.Timber
 
-
-
-
 class PhotoDetailActivity : BaseDaggerActivity<PhotoDetailViewState, PhotoDetailViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo)
         createViewModel(PhotoDetailViewModel::class.java)
-        //supportActionBar!!.setTitle("Your Activity Title"); // for set actionbar title
         supportActionBar!!.setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
         bindBundle()
     }
@@ -46,8 +42,6 @@ class PhotoDetailActivity : BaseDaggerActivity<PhotoDetailViewState, PhotoDetail
 
     override fun handleState(state: PhotoDetailViewState) {
     }
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId

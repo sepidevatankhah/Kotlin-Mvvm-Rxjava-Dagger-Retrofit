@@ -1,6 +1,5 @@
 package de.joyn.myapplication.ui.photoList
 
-import de.joyn.myapplication.domain.entity.FlowerModel
 import de.joyn.myapplication.domain.interactor.GetPhotoUseCase
 import de.joyn.myapplication.ui.base.BaseViewModel
 import timber.log.Timber
@@ -23,7 +22,5 @@ class PhotoListViewModel @Inject constructor(private val getFlowerUseCase: GetPh
         compositeDisposable.add(disposable)
     }
 
-//    fun updateFilter(filter: String) {
-//    }
 
 }
