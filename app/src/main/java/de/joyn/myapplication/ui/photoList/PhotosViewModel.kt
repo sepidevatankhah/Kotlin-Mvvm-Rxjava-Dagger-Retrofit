@@ -9,7 +9,6 @@ import org.reactivestreams.Publisher
 import timber.log.Timber
 import javax.inject.Inject
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import de.joyn.myapplication.data.repository.NetworkState
@@ -26,11 +25,24 @@ The view model will responsible for creating the PagedList and give to the activ
 so it’s can observe the data changes and pass it to the adapter.
 */
 
-class PhotoListViewModel  : ViewModel() {
+class PhotosViewModel @Inject constructor(private val getPhotoUseCase: GetPhotoUseCase,
+                                          private val restApi: RestApi) :
+    BaseViewModel<PhotoListViewState>() {
+
+
+
+    fun getPhotos(filter: String?){
+        val disposable = getPhotoUseCase.execute(filter).subscribe({ response->
+            Timber.i("emitter size is"+response.response.size)
+            //stateLiveData.postValue(PhotoListViewState(response.response))
+        },{t: Throwable? ->
+            Timber.e(t)
+        })
+        compositeDisposable.add(disposable)
+    }
 
     var photoList: LiveData<PagedList<Models.PhotoResponse>>
     private val pageSize = 15
-    private val compositeDisposable = CompositeDisposable()
     private val sourceFactory: PhotoDataSourceFactory
 
     init {
@@ -52,17 +64,15 @@ class PhotoListViewModel  : ViewModel() {
     }
 
 
-    fun getNetworkState(): LiveData<NetworkState> =
-        Transformations.switchMap<PhotoPageKeyedDataSource, NetworkState>(
+    fun getNetworkState(): LiveData<NetworkState> = Transformations.switchMap<PhotoPageKeyedDataSource, NetworkState>(
         sourceFactory.photosDataSourceLiveData, { it.networkState })
 
-    fun getRefreshState(): LiveData<NetworkState> =
-        Transformations.switchMap<PhotoPageKeyedDataSource, NetworkState>(
-        sourceFactory.photosDataSourceLiveData
-    ) { it.initialLoad }
+    fun getRefreshState(): LiveData<NetworkState> = Transformations.switchMap<PhotoPageKeyedDataSource, NetworkState>(
+        sourceFactory.photosDataSourceLiveData, { it.initialLoad })
 
 
     fun refresh() {
         sourceFactory.photosDataSourceLiveData.value!!.invalidate()
     }
+
 }

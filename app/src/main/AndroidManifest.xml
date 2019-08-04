@@ -15,7 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:name=".App">
-        <activity android:name=".ui.photoList.PhotoListActivity" android:launchMode="singleTop">
+        <activity android:name=".ui.photoList.PhotoActivity" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
