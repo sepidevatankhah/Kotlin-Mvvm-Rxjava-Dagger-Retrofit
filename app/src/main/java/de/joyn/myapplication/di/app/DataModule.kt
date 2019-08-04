@@ -5,14 +5,12 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
-import de.joyn.myapplication.BuildConfig
 import de.joyn.myapplication.data.repository.RepositoryImp
 import de.joyn.myapplication.di.scope.ForApplication
 import de.joyn.myapplication.domain.repository.ConnectivityManager
 import de.joyn.myapplication.domain.repository.Repository
 import de.joyn.myapplication.network.RestApi
 import okhttp3.Cache
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -43,7 +41,6 @@ class DataModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
-
 
     @Singleton
     @Provides
@@ -78,7 +75,6 @@ class DataModule {
                 request = request.newBuilder()
                     .url(url)
                     .build()
-
                 /*
                 *  Leveraging the advantage of using Kotlin,
                 *  we initialize the request and change its header depending on whether
