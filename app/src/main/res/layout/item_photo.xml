@@ -7,7 +7,7 @@
                                                    android:id="@+id/flower_container">
 
     <ImageView
-            android:id="@+id/imgPreview"
+            android:id="@+id/img_flower"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -22,12 +22,12 @@
             android:layout_height="26dp"
             app:srcCompat="@drawable/round_remove_red_eye_24"
             android:id="@+id/imgView"
-            app:layout_constraintStart_toEndOf="@+id/imgPreview"
+            app:layout_constraintStart_toEndOf="@+id/img_flower"
             android:layout_marginStart="8dp"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toStartOf="@+id/txtView"
             android:contentDescription="@string/views"
-            app:layout_constraintBottom_toBottomOf="@+id/imgPreview" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_flower" android:layout_marginBottom="8dp"
     />
     <TextView
             tools:text="2500"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtUserName"
-            app:layout_constraintTop_toTopOf="@+id/imgPreview"
+            app:layout_constraintTop_toTopOf="@+id/img_flower"
             app:layout_constraintBottom_toTopOf="@+id/imgLike" app:layout_constraintVertical_bias="0.43"
             app:layout_constraintStart_toStartOf="@+id/imgLike"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"

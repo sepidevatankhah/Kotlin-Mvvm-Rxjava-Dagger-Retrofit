@@ -5,15 +5,15 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import de.joyn.myapplication.ui.photoDetail.PhotoDetailViewModel
-import de.joyn.myapplication.ui.photoList.PhotosViewModel
+import de.joyn.myapplication.ui.photoList.PhotoListViewModel
 
 @Module
 abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(clazz = PhotosViewModel::class)
-    abstract fun bindPhotoListViewModel(viewModel: PhotosViewModel): ViewModel
+    @ViewModelKey(clazz = PhotoListViewModel::class)
+    abstract fun bindPhotoListViewModel(viewModel: PhotoListViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -2,7 +2,6 @@ package de.joyn.myapplication.domain.interactor.base
 
 import de.joyn.myapplication.domain.executer.PostExecutionThread
 import de.joyn.myapplication.domain.executer.UseCaseExecutor
-import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 
@@ -27,10 +26,6 @@ abstract class UseCase<Responses, Params>(
     }
 
     fun <T> Single<T>.applySchedulers(): Single<T> {
-        return subscribeOn(getUseCaseExecutor()).observeOn(getPostExecutionThread())
-    }
-
-    fun <T> Flowable<T>.applySchedulers(): Flowable<T> {
         return subscribeOn(getUseCaseExecutor()).observeOn(getPostExecutionThread())
     }
 }

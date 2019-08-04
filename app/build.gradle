@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 28
@@ -33,16 +32,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-
 }
 
 
-androidExtensions {
-    //For LayoutContainer in PhotoListViewHolder to provide
-    // Android Extensions-style view access
-    experimental = true
-}
 
 
 dependencies {
@@ -83,10 +75,8 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$version_timber"
 
     //Google Architecture components
-    implementation "android.arch.lifecycle:viewmodel:$version_lifecycle_extensions"
     implementation "android.arch.lifecycle:extensions:$version_lifecycle_extensions"
-    implementation "android.arch.paging:runtime:$version_lifecycle_extensions"
-    //implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "android.arch.lifecycle:viewmodel:$version_lifecycle_extensions"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
@@ -96,7 +86,7 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$version_rx_binding"
 
 
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+
 }
 
 
