@@ -11,7 +11,7 @@ class PhotoRecyclerView @Inject constructor(
     @NonNull var diffCallback: PhotoDiffCallback,
     var factory: PhotoViewHolderFactory
 ) :
-    ListAdapter<Models.FlowerResponse, PhotoViewHolder>(diffCallback) {
+    ListAdapter<Models.PhotoResponse, PhotoViewHolder>(diffCallback) {
 
     val mClickPS: PublishSubject<PhotoViewHolderAction> = PublishSubject.create()
 

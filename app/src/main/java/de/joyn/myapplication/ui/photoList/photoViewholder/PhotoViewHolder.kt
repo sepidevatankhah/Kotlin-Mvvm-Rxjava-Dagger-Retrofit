@@ -15,9 +15,9 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_photo.view.*
 
 class PhotoViewHolder(itemView: View, viewModel: PhotoViewModel) :
-    BaseViewHolder<PhotoViewHolderAction, Models.FlowerResponse, PhotoViewModel>(itemView, viewModel) {
+    BaseViewHolder<PhotoViewHolderAction, Models.PhotoResponse, PhotoViewModel>(itemView, viewModel) {
 
-    private val imgPreviewUrl: ImageView by lazy { itemView.img_flower }
+    private val imgPreviewUrl: ImageView by lazy { itemView.imgPreview }
     private val txtLikes: TextView by lazy { itemView.txtLikes }
     private val txtDownloads: TextView by lazy { itemView.txtDownload }
     private val txtUserName: TextView by lazy { itemView.txtUserName }
@@ -46,7 +46,7 @@ class PhotoViewHolder(itemView: View, viewModel: PhotoViewModel) :
 //        }
     }
 
-    override fun itemOnClick(actionSubject: PublishSubject<PhotoViewHolderAction> , currentRowData : Models.FlowerResponse? ) {
+    override fun itemOnClick(actionSubject: PublishSubject<PhotoViewHolderAction> , currentRowData : Models.PhotoResponse? ) {
         RxView.clicks(itemView.findViewById(R.id.flower_container))
             .map { o -> PhotoViewHolderAction.createSelectAction(adapterPosition , currentRowData ) }
             .repeat()

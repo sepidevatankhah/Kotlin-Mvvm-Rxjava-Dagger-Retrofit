@@ -5,11 +5,11 @@ import de.joyn.myapplication.network.dto.Models
 import javax.inject.Inject
 
 class PhotoDiffCallback
-@Inject constructor() : DiffUtil.ItemCallback<Models.FlowerResponse>() {
-    override fun areItemsTheSame(oldItem: Models.FlowerResponse, newItem: Models.FlowerResponse): Boolean =
+@Inject constructor() : DiffUtil.ItemCallback<Models.PhotoResponse>() {
+    override fun areItemsTheSame(oldItem: Models.PhotoResponse, newItem: Models.PhotoResponse): Boolean =
         oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Models.FlowerResponse, newItem: Models.FlowerResponse): Boolean {
+    override fun areContentsTheSame(oldItem: Models.PhotoResponse, newItem: Models.PhotoResponse): Boolean {
         return false
     }
 }
