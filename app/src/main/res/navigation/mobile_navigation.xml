@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/mobile_navigation" app:startDestination="@id/photosFragment">
-    <fragment android:id="@+id/photosFragment" android:name="de.joyn.myapplication.ui.fragments.photos.PhotosFragment"
-              android:label="PhotosFragment"/>
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mobile_navigation"
+            app:startDestination="@id/photosFragment">
+    <fragment android:id="@+id/photosFragment"
+              android:name="de.joyn.myapplication.ui.fragments.photos.PhotosFragment"
+              android:label="PhotosFragment"
+              tools:layout="@layout/activity_photo">
+        <action android:id="@+id/action_photosFragment_to_photoDetailFragment"
+                app:destination="@id/photoDetailFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment android:id="@+id/photoDetailFragment"
+              android:name="de.joyn.myapplication.ui.fragments.photoDetail.PhotoDetailFragment"
+              android:label="PhotoDetailFragment"
+              tools:layout="@layout/activity_photo">
+        <argument android:name="imageUrl" app:argType="string"/>
+        <argument android:name="userName" app:argType="string"/>
+        <argument android:name="tags" app:argType="string"/>
+    </fragment>
 </navigation>

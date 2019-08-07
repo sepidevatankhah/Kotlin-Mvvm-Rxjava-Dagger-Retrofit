@@ -3,14 +3,22 @@ package de.joyn.myapplication.ui.photoList
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import de.joyn.myapplication.network.dto.Models
 import timber.log.Timber
 
 typealias ClickListener = (Models.PhotoResponse) -> Unit
 
 class PhotoAdapter(
-    //private val clickListener: ClickListener
+    private val clickListener: ClickListener
 ) : PagedListAdapter<Models.PhotoResponse, PhotoViewHolder>(diffCallback) {
+
+//    fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
+//        itemView.setOnClickListener {
+//            event.invoke(adapterPosition, itemViewType)
+//        }
+//        return this
+//    }
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         Timber.d("Binding view holder at position $position")
@@ -18,11 +26,11 @@ class PhotoAdapter(
 
         with(holder) {
             bindTo(photo)
-//            photo?.let {
-//                itemView.setOnClickListener {
-//                    clickListener(photo)
-//                }
-//            }
+            photo?.let {
+                itemView.setOnClickListener {
+                    clickListener(photo)
+                }
+            }
         }
     }
 

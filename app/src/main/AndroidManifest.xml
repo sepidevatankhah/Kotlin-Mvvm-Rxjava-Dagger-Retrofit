@@ -18,22 +18,27 @@
 
         <activity android:name=".ui.MainActivity" android:launchMode="singleTop">
             <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable"/>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <!--<activity android:name=".ui.photoList.PhotoListActivity" android:launchMode="singleTop">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.SEARCH"/>-->
-            <!--</intent-filter>-->
-            <!--<meta-data android:name="android.app.searchable"-->
-                       <!--android:resource="@xml/searchable"/>-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.SEARCH"/>-->
+        <!--</intent-filter>-->
+        <!--<meta-data android:name="android.app.searchable"-->
+        <!--android:resource="@xml/searchable"/>-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+        <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+        <!--</intent-filter>-->
         <!--</activity>-->
         <!--<activity android:name=".ui.photoDetail.PhotoDetailActivity" android:launchMode="singleTop"/>-->
     </application>

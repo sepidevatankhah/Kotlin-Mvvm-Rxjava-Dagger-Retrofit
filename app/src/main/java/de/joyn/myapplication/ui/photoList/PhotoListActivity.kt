@@ -26,8 +26,12 @@ import de.joyn.myapplication.network.dto.Models
 
 class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewModel>(), SearchView.OnQueryTextListener {
 
+    private val clickListener: ClickListener = this::onPhotoClicked
 
-    private val photoListAdapter = PhotoAdapter()
+    private fun onPhotoClicked(photo: Models.PhotoResponse) {
+
+    }
+    private val photoListAdapter = PhotoAdapter(clickListener)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

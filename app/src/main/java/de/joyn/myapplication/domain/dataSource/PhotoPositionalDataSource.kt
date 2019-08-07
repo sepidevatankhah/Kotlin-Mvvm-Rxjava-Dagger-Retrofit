@@ -1,4 +1,4 @@
-package de.joyn.myapplication.domain
+package de.joyn.myapplication.domain.dataSource
 
 import androidx.paging.PositionalDataSource
 import de.joyn.myapplication.domain.interactor.GetPhotoUseCase
@@ -15,6 +15,7 @@ class PhotoPositionalDataSource @Inject constructor(
     private val getPhotoUseCase: GetPhotoUseCase
 ) : PositionalDataSource<Models.PhotoResponse>() {
 
+    fun setFilter(filter : String?)   = filter
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     private fun computeCount(): Int {

@@ -30,6 +30,7 @@ abstract class BaseFragment : Fragment() {
     abstract fun injectDependencies(fragment: Fragment)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(getLayout(), container, false)
     }
 

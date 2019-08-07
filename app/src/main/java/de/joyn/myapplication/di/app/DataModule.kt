@@ -17,6 +17,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import okhttp3.logging.HttpLoggingInterceptor
+
 
 @Module
 object DataModule {
@@ -105,12 +107,17 @@ object DataModule {
                         "Cache-Control",
                         "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7
                     ).build()
+
+
                 // End of if-else statement
 
                 // Add the modified request to the chain.
                 chain.proceed(request)
             }
-
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        // val httpClient = OkHttpClient.Builder()
+        builder.addNetworkInterceptor(logging)  // <-- this is the important line!
 
         return builder.build()
     }

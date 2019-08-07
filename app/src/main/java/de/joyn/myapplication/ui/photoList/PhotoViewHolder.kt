@@ -20,6 +20,8 @@ class PhotoViewHolder(containerView: ViewGroup) : RecyclerView.ViewHolder
     LayoutInflater.from(containerView.context).inflate(R.layout.item_photo, containerView, false)
 ) {
 
+
+
     /**
      * Items might be null if they are not paged in yet. PagedListAdapter will re-bind the
      * ViewHolder when Item is loaded.
