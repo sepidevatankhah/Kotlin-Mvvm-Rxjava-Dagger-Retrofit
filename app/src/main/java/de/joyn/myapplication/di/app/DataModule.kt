@@ -19,20 +19,23 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class DataModule {
+object DataModule {
 
     @Singleton
+    @JvmStatic
     @Provides
     fun provideRepository(api: RestApi): Repository {
         return RepositoryImp(api)
     }
 
     @Singleton
+    @JvmStatic
     @Provides
     fun provideForSquareApi(retrofit: Retrofit): RestApi =
         retrofit.create(RestApi::class.java)
 
     @Singleton
+    @JvmStatic
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit =
         Retrofit.Builder()
@@ -43,11 +46,13 @@ class DataModule {
             .build()
 
     @Singleton
+    @JvmStatic
     @Provides
     fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
 
     @Singleton
+    @JvmStatic
     @Provides
     fun provideOkHttpClient(
         connectivityManager: ConnectivityManager,

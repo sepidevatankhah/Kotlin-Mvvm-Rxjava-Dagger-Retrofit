@@ -14,7 +14,9 @@ import de.joyn.myapplication.util.ConnectivityManagerImp
 import javax.inject.Singleton
 
 @Module
-class AppModule {
+object AppModule {
+
+    @JvmStatic
     @Provides
     @Singleton
     fun provideUseCaseExecutor(): UseCaseExecutor {
@@ -22,15 +24,18 @@ class AppModule {
     }
 
     @Provides
+    @JvmStatic
     @Singleton
     fun postExecutionThread(): PostExecutionThread = UiThreadExecutor()
 
 
     @Provides
+    @JvmStatic
     @ForApplication
     fun provideContext(app: App): Context = app.applicationContext
 
     @Provides
+    @JvmStatic
     @Singleton
     fun provideConnectivityManager(connectivityManagerImp: ConnectivityManagerImp)
             : ConnectivityManager = connectivityManagerImp
