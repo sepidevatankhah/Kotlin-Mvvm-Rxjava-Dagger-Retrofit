@@ -21,6 +21,7 @@ buildscript {
         version_rxjava ="2.2.6"
         version_rxandroid = "2.1.1"
         paging_version ="2.1.0"
+        navigationVersion = "2.0.0"
     }
     repositories {
         google()

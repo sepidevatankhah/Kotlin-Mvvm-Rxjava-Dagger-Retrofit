@@ -14,54 +14,49 @@ import javax.inject.Inject
 import javax.inject.Provider
 import android.app.SearchManager
 import android.content.Context
+import android.widget.LinearLayout
 import android.widget.SearchView
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.LinearLayoutManager
+import de.joyn.myapplication.network.dto.Models
 
 
 class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewModel>(), SearchView.OnQueryTextListener {
 
 
-    @Inject
-    lateinit var flowerAdapterProvider: Provider<PhotoRecyclerView>
-    lateinit var flowerAdapter: PhotoRecyclerView
+    private val photoListAdapter = PhotoAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_list)
+        //viewModel.stateLiveData = viewModel.photoList as MutableLiveData<PhotoListViewState>
         createViewModel(PhotoListViewModel::class.java)
+
+        viewModel = ViewModelProviders.of(this,viewModelFactory ).get(viewModel::class.java)
+        viewModel.photoList.observe(this, Observer { photoList ->
+            photoList?.let {  render(photoList) }
+        })
         initRecyclerView()
     }
 
+    fun render(photoList : PagedList<Models.PhotoResponse>)
+    {
+        photoListAdapter.submitList(photoList)
+    }
+
     private fun initRecyclerView() {
-        flowerAdapter = flowerAdapterProvider.get()
-        recyclerView.adapter = flowerAdapter
-        var gridLayoutManager = GridLayoutManager(this, 1)
-        recyclerView.layoutManager = gridLayoutManager
-
-//        recyclerView.addOnScrollListener(object : EndlessRecyclerViewScrollListener(gridLayoutManager) {
-//            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-//                //todo load more
-//            }
-//        })
-        val disposable = flowerAdapter.mClickPS
-            .subscribe { action ->
-                Timber.i("clicked-- ${action.adapterPosition}")
-
-                val model = action.currentRowData
-                Timber.d("model : " + model)
-                val bundle = Bundle()
-                bundle.putString("IMAGE_URL", model!!.largeImageUrl)
-                bundle.putString("USER_NAME", model!!.userName)
-                bundle.putString("TAGS", model!!.tags)
-                var intent = Intent(this@PhotoListActivity, PhotoDetailActivity::class.java)
-                intent.putExtras(bundle)
-                startActivity(intent)
-            }
-        compositDesposable.add(disposable)
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(applicationContext)
+            adapter = photoListAdapter
+        }
 
     }
 
     override fun handleState(state: PhotoListViewState) {
-        flowerAdapter.submitList(state.flowerModels)
     }
 
     /**
@@ -91,7 +86,7 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
 
     override fun onQueryTextChange(newText: String?): Boolean {
         Timber.d("query : %s", newText)
-        if (newText!!.trim().replace(" ","").length >= 3)
+        if (newText!!.trim().replace(" ", "").length >= 3)
             viewModel.getPhotos(newText)
         return true
     }

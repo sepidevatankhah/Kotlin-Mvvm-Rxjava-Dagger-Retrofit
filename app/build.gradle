@@ -77,7 +77,7 @@ dependencies {
     //Google Architecture components
     implementation "android.arch.lifecycle:extensions:$version_lifecycle_extensions"
     implementation "android.arch.lifecycle:viewmodel:$version_lifecycle_extensions"
-
+    implementation "android.arch.paging:runtime:$version_lifecycle_extensions"
     // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
 
@@ -85,6 +85,8 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:$version_rx_binding"
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$version_rx_binding"
 
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
 
 
 }

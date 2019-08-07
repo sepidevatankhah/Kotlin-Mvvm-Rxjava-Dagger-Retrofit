@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/mobile_navigation" app:startDestination="@id/photosFragment">
+    <fragment android:id="@+id/photosFragment" android:name="de.joyn.myapplication.ui.fragments.photos.PhotosFragment"
+              android:label="PhotosFragment"/>
+</navigation>

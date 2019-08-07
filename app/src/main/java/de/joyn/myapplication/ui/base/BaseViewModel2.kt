@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseViewModel<S> : ViewModel() {
+abstract class BaseViewModel2<S> : ViewModel() {
 
-    val stateLiveData: MutableLiveData<S> = MutableLiveData()
+    var stateLiveData: MutableLiveData<S> = MutableLiveData()
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

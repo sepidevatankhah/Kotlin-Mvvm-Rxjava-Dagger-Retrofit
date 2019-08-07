@@ -9,7 +9,7 @@ import de.joyn.myapplication.di.viewmodel.ViewModelFactory
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-abstract class BaseDaggerActivity<S : BaseViewState, VM : BaseViewModel<S>> : DaggerAppCompatActivity() {
+abstract class BaseDaggerActivity<S : BaseViewState, VM : BaseViewModel2<S>> : DaggerAppCompatActivity() {
 
     @Inject
     @JvmField
