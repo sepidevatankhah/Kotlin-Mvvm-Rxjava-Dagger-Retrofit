@@ -14,10 +14,10 @@ abstract class SingleUseCase<Responses, Params>(useCaseExecutor: UseCaseExecutor
                                                 protected var repository: Repository) :
     UseCase<Single<Responses>, Params>(useCaseExecutor, postExecutionThread) {
 
-    open fun execute(params: Params?): Single<Responses> {
+    open fun execute(params: Params): Single<Responses> {
         return interact(params).applySchedulers()
     }
 
-    protected abstract fun interact(params: Params?): Single<Responses>
+    protected abstract fun interact(params: Params): Single<Responses>
 
 }
