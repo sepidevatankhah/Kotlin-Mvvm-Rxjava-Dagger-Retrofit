@@ -4,7 +4,7 @@ Photo list with MVVM(Google Component Architecture), Rxjava, Dagger2, and Kotlin
 <ul>
 <li>The application supports both portrait and landscape mode </li>
 <li>The user is able to search for images entering a search term with at least 3  characters </li>
-<li>When the app starts it triggers a search for the string “flowers</li>
+<li>When the app starts it triggers a search for the string "flowers"</li>
 <li>When an item in the result list gets clicked, a new detail screen will be opened</li>
 
 </ul>
