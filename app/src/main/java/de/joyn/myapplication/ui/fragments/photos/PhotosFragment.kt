@@ -57,6 +57,7 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
         createViewModel()
         //set default value for searchView
         viewModel.setFilter(getString(R.string.search_filter_default_value))
+
     }
 
     private fun createViewModel() {
@@ -99,17 +100,15 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
             setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
             setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
             queryHint = getString(R.string.search_view_hint)
-            setQuery(getString(R.string.search_filter_default_value),true)
+            //setQuery(if (viewModel.cachedFilter.isEmpty()) getString(R.string.search_filter_default_value) else viewModel.cachedFilter, true)
+            setQuery(viewModel.cachedFilter, false)
             isSubmitButtonEnabled = true
         }.setOnQueryTextListener(this)
 
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(
-            item!!,
-            view!!.findNavController()
-        )
+        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController())
                 || super.onOptionsItemSelected(item)
     }
 
@@ -120,9 +119,11 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
     override fun onQueryTextChange(newText: String?): Boolean {
         Timber.d("query : %s", newText)
         if (newText!!.trim().replace(" ", "").length >= 3 || newText!!.isEmpty()) {
+            viewModel.cachedFilter = newText
             viewModel.setFilter(newText!!)
             viewModel.recreatePhotoList()
             startObserving()
+
         }
         return true
     }

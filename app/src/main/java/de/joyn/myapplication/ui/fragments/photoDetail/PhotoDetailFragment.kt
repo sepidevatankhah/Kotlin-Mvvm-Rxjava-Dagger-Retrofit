@@ -4,7 +4,6 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import dagger.android.support.AndroidSupportInjection
@@ -28,7 +27,6 @@ class PhotoDetailFragment : BaseFragment<PhotoDetailViewModel>() {
 
     override fun onCreateCompleted() {
         setHasOptionsMenu(true)
-        //supportActionBar!!.setDisplayHomeAsUpEnabled(true);
         createViewModel()
     }
 
@@ -48,9 +46,7 @@ class PhotoDetailFragment : BaseFragment<PhotoDetailViewModel>() {
 
     private fun startObserving() {
         viewModel.observableStatus.observe(this, Observer { status ->
-            status?.let {
-                render(status)
-            }
+            status
         })
     }
 
@@ -72,16 +68,4 @@ class PhotoDetailFragment : BaseFragment<PhotoDetailViewModel>() {
         }
     }
 
-    private fun render(status: Boolean) {
-        when (status) {
-            true -> {
-                view?.let {
-                    Navigation.findNavController(it).popBackStack()
-                }
-            }
-            //TODO:handle
-            false -> showMessage("")
-            //addNoteText.error = getString(R.string.error_validating)
-        }
-    }
 }
