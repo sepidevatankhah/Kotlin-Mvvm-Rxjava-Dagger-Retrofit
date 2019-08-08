@@ -2,7 +2,7 @@ package de.joyn.myapplication.ui.fragments.photoDetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import de.joyn.myapplication.ui.BaseViewModel
+import de.joyn.myapplication.ui.base.BaseViewModel
 
 class PhotoDetailViewModel : BaseViewModel() {
 

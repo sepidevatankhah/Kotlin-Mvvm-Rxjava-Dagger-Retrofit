@@ -1,9 +1,8 @@
-package de.joyn.myapplication.ui.photoList
+package de.joyn.myapplication.ui.fragments.photos
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import de.joyn.myapplication.network.dto.Models
 import timber.log.Timber
 

@@ -11,7 +11,7 @@ import javax.inject.Inject
 class RepositoryImp @Inject constructor(private val restApi: RestApi) : Repository {
     override fun getFlowerUseCase(param: PhotoModel): Single<Models.BasePhoto> {
         return Single.create { emitter ->
-            restApi.getFlowers(param.query, param.pageSize, param.pageNum).subscribe({ response ->
+            restApi.getPhotos(param.query, param.pageSize, param.pageNum).subscribe({ response ->
                 Timber.d("response : %s", response)
                 emitter.onSuccess(response)
             }, {

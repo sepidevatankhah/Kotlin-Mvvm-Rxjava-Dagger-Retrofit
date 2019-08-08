@@ -16,8 +16,8 @@ interface RestApi {
 
     //@GET("api/?key=13173797-7e626eef5603a5f5f39b2369e")
     @GET("api/?")
-    fun getFlowers(@Query("q") query:String? = "flowers" ,
-                   @Query("per_page") pageSize:Int? = 20 ,
-                   @Query("page") pageNum :Int? ): Single<Models.BasePhoto>
+    fun getPhotos(@Query("q") query:String? = "",
+                  @Query("per_page") pageSize:Int? = 20,
+                  @Query("page") pageNum :Int? ): Single<Models.BasePhoto>
 
 }

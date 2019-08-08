@@ -5,8 +5,7 @@
             app:startDestination="@id/photosFragment">
     <fragment android:id="@+id/photosFragment"
               android:name="de.joyn.myapplication.ui.fragments.photos.PhotosFragment"
-              android:label="PhotosFragment"
-              tools:layout="@layout/activity_photo">
+              tools:layout="@layout/fragment_photo">
         <action android:id="@+id/action_photosFragment_to_photoDetailFragment"
                 app:destination="@id/photoDetailFragment" app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_left"
@@ -14,8 +13,7 @@
     </fragment>
     <fragment android:id="@+id/photoDetailFragment"
               android:name="de.joyn.myapplication.ui.fragments.photoDetail.PhotoDetailFragment"
-              android:label="PhotoDetailFragment"
-              tools:layout="@layout/activity_photo">
+              tools:layout="@layout/fragment_photo">
         <argument android:name="imageUrl" app:argType="string"/>
         <argument android:name="userName" app:argType="string"/>
         <argument android:name="tags" app:argType="string"/>

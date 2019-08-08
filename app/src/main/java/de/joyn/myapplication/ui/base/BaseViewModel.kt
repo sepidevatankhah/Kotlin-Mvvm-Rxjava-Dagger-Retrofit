@@ -1,4 +1,4 @@
-package de.joyn.myapplication.ui
+package de.joyn.myapplication.ui.base
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable

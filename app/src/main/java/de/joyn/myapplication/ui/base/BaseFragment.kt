@@ -8,21 +8,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import dagger.android.support.AndroidSupportInjection
-import de.joyn.myapplication.di.viewmodel.ViewModelFactory
 import io.reactivex.disposables.CompositeDisposable
-import javax.inject.Inject
-import dagger.android.support.DaggerFragment
 import androidx.annotation.LayoutRes
+import de.joyn.myapplication.ui.MainActivity
 
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 
-    val compositDesposable: CompositeDisposable = CompositeDisposable()
 
-    override fun onAttach(context: Context?) {
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    protected lateinit var viewModel: VM
+
+    override fun onAttach(context: Context) {
         injectDependencies(this)
         super.onAttach(context)
     }
@@ -31,6 +28,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
+
         return inflater.inflate(getLayout(), container, false)
     }
 
@@ -51,7 +49,7 @@ abstract class BaseFragment : Fragment() {
 
 
     override fun onDestroy() {
-        compositDesposable.clear()
+        compositeDisposable.clear()
         super.onDestroy()
     }
 

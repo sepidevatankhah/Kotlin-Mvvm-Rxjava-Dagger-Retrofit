@@ -10,34 +10,48 @@ import com.bumptech.glide.request.RequestOptions
 import dagger.android.support.AndroidSupportInjection
 import de.joyn.myapplication.R
 import de.joyn.myapplication.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.activity_photo.*
+import kotlinx.android.synthetic.main.fragment_photo.*
 import javax.inject.Inject
 
-class PhotoDetailFragment : BaseFragment() {
+class PhotoDetailFragment : BaseFragment<PhotoDetailViewModel>() {
 
     @Inject
     lateinit var photoDetailViewModelFactory: PhotoDetailViewModelFactory
-    lateinit var viewModel: PhotoDetailViewModel
 
     override fun injectDependencies(fragment: Fragment) {
         AndroidSupportInjection.inject(this)
     }
 
     override fun getLayout(): Int =
-        R.layout.activity_photo
+        R.layout.fragment_photo
 
 
     override fun onCreateCompleted() {
         setHasOptionsMenu(true)
-        viewModel = ViewModelProviders.of(this, photoDetailViewModelFactory).get(PhotoDetailViewModel::class.java)
-        viewModel.observableStatus.observe(this, Observer { status ->
-            status?.let { render(status) }
-        })
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true);
+        createViewModel()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        startObserving()
     }
 
     override fun onResume() {
         super.onResume()
         bindBundle()
+    }
+
+    private fun createViewModel() {
+        viewModel = ViewModelProviders.of(this, photoDetailViewModelFactory).get(PhotoDetailViewModel::class.java)
+    }
+
+    private fun startObserving() {
+        viewModel.observableStatus.observe(this, Observer { status ->
+            status?.let {
+                render(status)
+            }
+        })
     }
 
     private fun bindBundle() {
@@ -67,7 +81,7 @@ class PhotoDetailFragment : BaseFragment() {
             }
             //TODO:handle
             false -> showMessage("")
-            //addNoteText.error = getString(R.string.error_validating_note)
+            //addNoteText.error = getString(R.string.error_validating)
         }
     }
 }

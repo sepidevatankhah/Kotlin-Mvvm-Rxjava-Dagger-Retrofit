@@ -2,6 +2,7 @@ package de.joyn.myapplication.ui.base
 
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerAppCompatActivity
@@ -9,7 +10,7 @@ import de.joyn.myapplication.di.viewmodel.ViewModelFactory
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-abstract class BaseDaggerActivity<S : BaseViewState, VM : BaseViewModel2<S>> : DaggerAppCompatActivity() {
+abstract class BaseDaggerActivity<S : BaseViewState, VM : BaseViewModel2<S>> : AppCompatActivity() {
 
     @Inject
     @JvmField

@@ -4,7 +4,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import de.joyn.myapplication.domain.dataSource.PhotoDataSourceFactory
-import de.joyn.myapplication.domain.interactor.GetPhotoUseCase
 import de.joyn.myapplication.ui.MainActivity
 import de.joyn.myapplication.ui.fragments.photoDetail.PhotoDetailFragment
 import de.joyn.myapplication.ui.fragments.photoDetail.PhotoDetailViewModelFactory
@@ -28,8 +27,8 @@ abstract class MainActivityModule {
     companion object {
         @JvmStatic
         @Provides
-        fun providePhotosViewModelFactory(dataSourceFactory: PhotoDataSourceFactory , getPhotoUseCase: GetPhotoUseCase) =
-            PhotosViewModelFactory(dataSourceFactory , getPhotoUseCase)
+        fun providePhotosViewModelFactory(dataSourceFactory: PhotoDataSourceFactory ) =
+            PhotosViewModelFactory(dataSourceFactory)
 
         @JvmStatic
         @Provides

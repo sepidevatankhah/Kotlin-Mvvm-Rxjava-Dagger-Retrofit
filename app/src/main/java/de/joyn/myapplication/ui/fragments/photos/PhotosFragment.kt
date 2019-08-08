@@ -9,40 +9,21 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.AndroidSupportInjection
 import de.joyn.myapplication.R
 import de.joyn.myapplication.network.dto.Models
 import de.joyn.myapplication.ui.base.BaseFragment
-import de.joyn.myapplication.ui.photoList.ClickListener
-import de.joyn.myapplication.ui.photoList.PhotoAdapter
-import kotlinx.android.synthetic.main.activity_photo_list.*
+import kotlinx.android.synthetic.main.fragment_photo_list.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class PhotosFragment : BaseFragment(), SearchView.OnQueryTextListener {
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        return false
-    }
+class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextListener {
 
-    override fun onQueryTextChange(newText: String?): Boolean {
-        Timber.d("query : %s", newText)
-        if (newText!!.trim().replace(" ", "").length >= 3)
-            //viewModel.getPhotos(newText)
-        {
-            viewModel.getFilteredPhotos(newText)
-            viewModel.recreatePhotoList()
-            getPagedPhotos()
-            //photoListAdapter.currentList?.dataSource?.invalidate()
-        }
-        return true
-    }
 
     private val clickListener: ClickListener = this::onPhotoClicked
 
@@ -58,7 +39,6 @@ class PhotosFragment : BaseFragment(), SearchView.OnQueryTextListener {
         }
     }
 
-    private lateinit var viewModel: PhotosViewModel
     @Inject
     lateinit var photosViewModelFactory: PhotosViewModelFactory
     private val photoListAdapter = PhotoAdapter(clickListener)
@@ -68,22 +48,29 @@ class PhotosFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     override fun getLayout(): Int {
-        return R.layout.activity_photo_list
+        return R.layout.fragment_photo_list
     }
 
     override fun onCreateCompleted() {
         initRecyclerView()
-        getPagedPhotos()
-
+        createViewModel()
+        //set default value for searchView
+        viewModel.setFilter(getString(R.string.search_filter_default_value))
     }
 
-    private fun getPagedPhotos() {
+    private fun createViewModel() {
         viewModel = ViewModelProviders.of(this, photosViewModelFactory).get(PhotosViewModel::class.java)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        startObserving()
+    }
+
+    private fun startObserving() {
         viewModel.getPhotoList().observe(this, Observer { pagedPhotoList ->
             pagedPhotoList?.let { render(pagedPhotoList) }
         })
-
-       // viewModel.observableStatus.observe(this, Observer {})
     }
 
     private fun render(pagedPhotoList: PagedList<Models.PhotoResponse>) {
@@ -100,31 +87,43 @@ class PhotosFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.search_menu, menu)
 
         // Get the SearchView and set the searchable configuration
         val searchManager = activity!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu!!.findItem(R.id.app_bar_search).actionView as SearchView).apply {
+        (menu.findItem(R.id.app_bar_search).actionView as SearchView).apply {
             // Assumes current activity is the searchable activity
             setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
             setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+            queryHint = getString(R.string.search_view_hint)
+            setQuery(getString(R.string.search_filter_default_value),true)
             isSubmitButtonEnabled = true
         }.setOnQueryTextListener(this)
 
     }
 
-
-//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater?.inflate(R.menu.overflow_menu, menu)
-//    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!,
-            view!!.findNavController())
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(
+            item!!,
+            view!!.findNavController()
+        )
                 || super.onOptionsItemSelected(item)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        Timber.d("query : %s", newText)
+        if (newText!!.trim().replace(" ", "").length >= 3 || newText!!.isEmpty()) {
+            viewModel.setFilter(newText!!)
+            viewModel.recreatePhotoList()
+            startObserving()
+        }
+        return true
     }
 
 

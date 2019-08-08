@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.jakewharton.rxbinding2.view.RxView
 import de.joyn.myapplication.R
 import de.joyn.myapplication.network.dto.Models
 import de.joyn.myapplication.ui.base.recyclerview.BaseViewHolder
@@ -47,9 +46,9 @@ class PhotoViewHolder(itemView: View, viewModel: PhotoViewModel) :
     }
 
     override fun itemOnClick(actionSubject: PublishSubject<PhotoViewHolderAction> , currentRowData : Models.PhotoResponse? ) {
-        RxView.clicks(itemView.findViewById(R.id.flower_container))
-            .map { o -> PhotoViewHolderAction.createSelectAction(adapterPosition , currentRowData ) }
-            .repeat()
-            .subscribe(actionSubject)
+//        RxView.clicks(itemView.findViewById(R.id.flower_container))
+//            .map { o -> PhotoViewHolderAction.createSelectAction(adapterPosition , currentRowData ) }
+//            .repeat()
+//            .subscribe(actionSubject)
     }
 }

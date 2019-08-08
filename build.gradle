@@ -20,8 +20,7 @@ buildscript {
         version_timber = "4.7.1"
         version_rxjava ="2.2.6"
         version_rxandroid = "2.1.1"
-        paging_version ="2.1.0"
-        navigationVersion = "2.1.0-beta02"
+        version_navigation = "2.1.0-beta02"
     }
     repositories {
         google()

@@ -7,14 +7,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.joyn.myapplication.R
 import de.joyn.myapplication.ui.base.BaseDaggerActivity
-import kotlinx.android.synthetic.main.activity_photo.*
+import kotlinx.android.synthetic.main.fragment_photo.*
 import timber.log.Timber
 
 class PhotoDetailActivity : BaseDaggerActivity<PhotoDetailViewState, PhotoDetailViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_photo)
+        setContentView(R.layout.fragment_photo)
         createViewModel(PhotoDetailViewModel::class.java)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
         bindBundle()

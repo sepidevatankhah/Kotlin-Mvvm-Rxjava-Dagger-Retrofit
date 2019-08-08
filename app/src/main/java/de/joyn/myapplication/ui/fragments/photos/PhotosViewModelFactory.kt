@@ -7,14 +7,13 @@ import de.joyn.myapplication.domain.interactor.GetPhotoUseCase
 import javax.inject.Inject
 
 class PhotosViewModelFactory @Inject constructor(
-    private val dataSourceFactory: PhotoDataSourceFactory ,
-    private val getPhotoUseCase: GetPhotoUseCase
+    private val dataSourceFactory: PhotoDataSourceFactory
 ) : ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PhotosViewModel::class.java)) {
-            return PhotosViewModel(dataSourceFactory , getPhotoUseCase) as T
+            return PhotosViewModel(dataSourceFactory) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

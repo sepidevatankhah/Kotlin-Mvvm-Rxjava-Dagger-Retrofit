@@ -54,14 +54,14 @@ class PhotoListViewModelTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        myViewModel = PhotoListViewModel(mockPhotoUseCase)
+        //myViewModel = PhotoListViewModel(mockPhotoUseCase)
         mockPhotoUseCase = GetPhotoUseCase(useCaseExecutor, postExecutionThread, mockDataRepository)
     }
 
     @Test
     fun `Given DataRepository returns data, when getPhotos() called, then update live data`() {
         //Setting how up the mock behaves
-        whenever(mockPhotoUseCase.execute("flowers")).thenReturn(Single.just(flowerResult))
+        //whenever(mockPhotoUseCase.execute("flowers")).thenReturn(Single.just(flowerResult))
 
         //Fire the test method
         myViewModel.getPhotos("flowers")
@@ -77,7 +77,7 @@ class PhotoListViewModelTest {
     @Test
     fun `Given DataRepository returns error, when getPhotos() called, then do not change live data`() {
         //Setting how up the mock behaves
-        whenever(mockPhotoUseCase.execute("flowers")).thenReturn(Single.error(Throwable()))
+       // whenever(mockPhotoUseCase.execute("flowers")).thenReturn(Single.error(Throwable()))
 
         myViewModel.stateLiveData.observeForever(mockLiveDataObserver)
 

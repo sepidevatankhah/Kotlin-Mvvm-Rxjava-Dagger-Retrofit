@@ -1,27 +1,21 @@
 package de.joyn.myapplication.ui.photoList
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import androidx.recyclerview.widget.GridLayoutManager
 import de.joyn.myapplication.R
 import de.joyn.myapplication.ui.base.BaseDaggerActivity
-import de.joyn.myapplication.ui.photoDetail.PhotoDetailActivity
-import de.joyn.myapplication.ui.photoList.photoViewholder.PhotoRecyclerView
-import kotlinx.android.synthetic.main.activity_photo_list.*
+import kotlinx.android.synthetic.main.fragment_photo_list.*
 import timber.log.Timber
-import javax.inject.Inject
-import javax.inject.Provider
 import android.app.SearchManager
 import android.content.Context
-import android.widget.LinearLayout
 import android.widget.SearchView
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.joyn.myapplication.network.dto.Models
+import de.joyn.myapplication.ui.fragments.photos.ClickListener
+import de.joyn.myapplication.ui.fragments.photos.PhotoAdapter
 
 
 class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewModel>(), SearchView.OnQueryTextListener {
@@ -35,7 +29,7 @@ class PhotoListActivity : BaseDaggerActivity<PhotoListViewState, PhotoListViewMo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_photo_list)
+        setContentView(R.layout.fragment_photo_list)
         //viewModel.stateLiveData = viewModel.photoList as MutableLiveData<PhotoListViewState>
         createViewModel(PhotoListViewModel::class.java)
 
