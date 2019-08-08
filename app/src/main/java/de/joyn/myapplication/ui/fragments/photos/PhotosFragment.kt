@@ -41,6 +41,7 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
 
     @Inject
     lateinit var photosViewModelFactory: PhotosViewModelFactory
+
     private val photoListAdapter = PhotoAdapter(clickListener)
 
     override fun injectDependencies(fragment: Fragment) {

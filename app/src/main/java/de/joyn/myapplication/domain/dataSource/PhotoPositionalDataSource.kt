@@ -6,7 +6,6 @@ import de.joyn.myapplication.network.dto.Models
 import javax.inject.Inject
 import android.content.ClipData.Item
 import de.joyn.myapplication.domain.entity.PhotoModel
-import de.joyn.myapplication.ui.photoList.PhotoListViewState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import timber.log.Timber

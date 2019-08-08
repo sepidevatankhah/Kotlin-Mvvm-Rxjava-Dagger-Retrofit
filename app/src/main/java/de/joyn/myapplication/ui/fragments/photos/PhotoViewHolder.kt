@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.joyn.myapplication.R
 import de.joyn.myapplication.network.dto.Models
-import de.joyn.myapplication.ui.photoDetail.PhotoDetailActivity
 import kotlinx.android.synthetic.main.item_photo.view.*
 
 class PhotoViewHolder(containerView: ViewGroup) : RecyclerView.ViewHolder(
