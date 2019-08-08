@@ -100,8 +100,10 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
             setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
             setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
             queryHint = getString(R.string.search_view_hint)
-            //setQuery(if (viewModel.cachedFilter.isEmpty()) getString(R.string.search_filter_default_value) else viewModel.cachedFilter, true)
-            setQuery(viewModel.cachedFilter, false)
+            setQuery(
+                if (viewModel.cachedFilter.isEmpty()) getString(R.string.search_filter_default_value) else viewModel.cachedFilter,
+                true
+            )
             isSubmitButtonEnabled = true
         }.setOnQueryTextListener(this)
 

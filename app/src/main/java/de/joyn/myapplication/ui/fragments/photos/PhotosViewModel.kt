@@ -19,7 +19,6 @@ class PhotosViewModel @Inject constructor(
 
     fun setFilter( filter: String) {
         dataSourceFactory.setFilter(if (cachedFilter.isEmpty()) filter else cachedFilter)
-        cachedFilter = filter
     }
 
     private val pagedListConfig = PagedList.Config.Builder()
