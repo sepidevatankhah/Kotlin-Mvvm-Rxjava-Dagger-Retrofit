@@ -8,14 +8,29 @@ import android.content.ClipData.Item
 import de.joyn.myapplication.domain.entity.PhotoModel
 import de.joyn.myapplication.ui.photoList.PhotoListViewState
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import timber.log.Timber
 
 
 class PhotoPositionalDataSource @Inject constructor(
     private val getPhotoUseCase: GetPhotoUseCase
-) : PositionalDataSource<Models.PhotoResponse>() {
+) : PositionalDataSource<Models.PhotoResponse>(), Disposable {
 
-    fun setFilter(filter : String?)   = filter
+    private var disposing = false
+    override fun isDisposed(): Boolean {
+        return disposing
+    }
+
+    override fun dispose() {
+        disposing = true
+        compositeDisposable.clear()
+    }
+
+    private var filter: String = ""
+    fun setFilter(filter: String) {
+        this.filter = filter
+    }
+
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     private fun computeCount(): Int {
@@ -23,22 +38,12 @@ class PhotoPositionalDataSource @Inject constructor(
         return getPhotoUseCase.execute(PhotoModel()).blockingGet().total
     }
 
-//    private fun loadRangeInternal(startPosition: Int, loadCount: Int): List<Models.PhotoResponse> {
-//        // actual load code here
-//
-//        val pageNum = startPosition / loadCount + 1
-//        var photoList: List<Models.PhotoResponse> =
-//            getPhotoUseCase.execute(PhotoModel("", loadCount, pageNum)).blockingGet().response
-//        Timber.d("photo list : %s ", photoList)
-//        return photoList
-//
-//    }
 
     private fun loadRangeInternal(startPosition: Int, loadCount: Int) {
         // actual load code here
 
         val pageNum = startPosition / loadCount + 1
-        val disposable = getPhotoUseCase.execute(PhotoModel("", loadCount, pageNum)).subscribe({ response ->
+        val disposable = getPhotoUseCase.execute(PhotoModel(filter, loadCount, pageNum)).subscribe({ response ->
             // Timber.i("emitter size is"+response.size)
         }, { t: Throwable? ->
             Timber.e(t)
@@ -50,7 +55,7 @@ class PhotoPositionalDataSource @Inject constructor(
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Models.PhotoResponse>) {
 
         val pageNum = params.startPosition / params.loadSize + 1
-        val disposable = getPhotoUseCase.execute(PhotoModel("", params.loadSize, pageNum)).subscribe({ response ->
+        val disposable = getPhotoUseCase.execute(PhotoModel(filter, params.loadSize, pageNum)).subscribe({ response ->
             // Timber.i("emitter size is"+response.size)
             callback.onResult(response.response);
         }, { t: Throwable? ->
@@ -61,14 +66,13 @@ class PhotoPositionalDataSource @Inject constructor(
     }
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Models.PhotoResponse>) {
-        val totalCount = 200000//computeCount()
+        val totalCount = 2000
         val position = computeInitialLoadPosition(params, totalCount)
         val loadSize = computeInitialLoadSize(params, position, totalCount)
 
         val pageNum = position / loadSize + 1
-        val disposable = getPhotoUseCase.execute(PhotoModel("", loadSize, pageNum)).subscribe({ response ->
-            // Timber.i("emitter size is"+response.size)
-            callback.onResult(response.response, position, totalCount)
+        val disposable = getPhotoUseCase.execute(PhotoModel(filter, loadSize, pageNum)).subscribe({ response ->
+            callback.onResult(response.response, position, response.total)
         }, { t: Throwable? ->
             Timber.e(t)
         })

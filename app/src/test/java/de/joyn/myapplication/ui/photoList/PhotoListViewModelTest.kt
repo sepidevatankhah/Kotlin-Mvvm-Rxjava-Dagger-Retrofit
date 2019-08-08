@@ -22,7 +22,7 @@ import org.junit.Rule
 
 
 //class PhotoListViewModelTest@Inject constructor(private val getFlowerUseCase: GetPhotoUseCase) :
-//    BaseViewModel<PhotoListViewState>() {
+//    BaseViewModel2<PhotoListViewState>() {
 class PhotoListViewModelTest {
 
     @Rule
@@ -48,7 +48,7 @@ class PhotoListViewModelTest {
 
 
     lateinit var myViewModel: PhotoListViewModel
-    lateinit var flowerResult: List<Models.FlowerResponse>
+    lateinit var flowerResult: List<Models.PhotoResponse>
 
 
     @Before

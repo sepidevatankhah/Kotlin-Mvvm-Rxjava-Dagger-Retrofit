@@ -34,7 +34,13 @@ class PhotosFragment : BaseFragment(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(newText: String?): Boolean {
         Timber.d("query : %s", newText)
         if (newText!!.trim().replace(" ", "").length >= 3)
-            viewModel.getPhotos(newText)
+            //viewModel.getPhotos(newText)
+        {
+            viewModel.getFilteredPhotos(newText)
+            viewModel.recreatePhotoList()
+            getPagedPhotos()
+            //photoListAdapter.currentList?.dataSource?.invalidate()
+        }
         return true
     }
 
@@ -71,12 +77,13 @@ class PhotosFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     }
 
-    private fun getPagedPhotos(filter: String? = "") {
+    private fun getPagedPhotos() {
         viewModel = ViewModelProviders.of(this, photosViewModelFactory).get(PhotosViewModel::class.java)
-        viewModel.photoList.observe(this, Observer { pagedPhotoList ->
+        viewModel.getPhotoList().observe(this, Observer { pagedPhotoList ->
             pagedPhotoList?.let { render(pagedPhotoList) }
         })
-        viewModel.observableStatus.observe(this, Observer {})
+
+       // viewModel.observableStatus.observe(this, Observer {})
     }
 
     private fun render(pagedPhotoList: PagedList<Models.PhotoResponse>) {

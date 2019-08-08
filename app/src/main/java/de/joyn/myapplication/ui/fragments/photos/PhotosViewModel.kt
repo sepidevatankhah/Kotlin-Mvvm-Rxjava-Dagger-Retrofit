@@ -16,16 +16,12 @@ private const val PAGE_SIZE = 20
 private const val INITIAL_LOAD_SIZE_HINT = 40
 
 class PhotosViewModel @Inject constructor(
-    private val dataSourceFactory: PhotoDataSourceFactory ,
+    private val dataSourceFactory: PhotoDataSourceFactory,
     private val getPhotoUseCase: GetPhotoUseCase
 ) : BaseViewModel() {
 
-    init {
-        //dataSourceFactory.setFilter()
-    }
 
-    fun getFilteredPhotos(filter: String?)
-    {
+    fun getFilteredPhotos(filter: String) {
         dataSourceFactory.setFilter(filter)
     }
 
@@ -41,11 +37,19 @@ class PhotosViewModel @Inject constructor(
         .setPageSize(PAGE_SIZE)
         .build()
 
-    val photoList = LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
+    private var photoList = LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
+
+    fun getPhotoList() : LiveData <PagedList<Models.PhotoResponse>> {
+        return photoList
+    }
+
+    fun recreatePhotoList() {
+        photoList = LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
+    }
 
     fun getPhotos(filter: String?) {
-        val disposable = getPhotoUseCase.execute(PhotoModel(filter,20 ,1)).subscribe({ response ->
-             Timber.i("emitter size is : %s" ,response.response)
+        val disposable = getPhotoUseCase.execute(PhotoModel(filter, 20, 1)).subscribe({ response ->
+            Timber.i("emitter size is : %s", response.response)
         }, { t: Throwable? ->
             Timber.e(t)
         })

@@ -8,10 +8,12 @@ class PhotoDataSourceFactory @Inject constructor(
     private val dataSource: PhotoPositionalDataSource
 ) : DataSource.Factory<Int, Models.PhotoResponse>() {
 
-    fun setFilter(filter : String?) : String?  = filter
+    fun setFilter(filter: String) {
+        dataSource.setFilter(filter)
+    }
+
     override fun create(): DataSource<Int, Models.PhotoResponse> {
-        dataSource
-       return dataSource
+            return dataSource
     }
 
 }
