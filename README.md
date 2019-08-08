@@ -1,5 +1,5 @@
 # Pixabay
-Simple Photo list application retriving pictures from Pixabay site 
+A Simple Photo list application retriving pictures from Pixabay site 
  
 <ul>
 <li>The application supports both portrait and landscape mode </li>
