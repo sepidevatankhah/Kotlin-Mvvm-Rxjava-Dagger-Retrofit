@@ -15,9 +15,11 @@ class PhotosViewModel @Inject constructor(
     private val dataSourceFactory: PhotoDataSourceFactory
 ) : BaseViewModel() {
 
+    var cachedFilter: String = ""
 
-    fun setFilter(filter: String) {
-        dataSourceFactory.setFilter(filter)
+    fun setFilter( filter: String) {
+        dataSourceFactory.setFilter(if (cachedFilter.isEmpty()) filter else cachedFilter)
+        cachedFilter = filter
     }
 
     private val pagedListConfig = PagedList.Config.Builder()
@@ -37,7 +39,7 @@ class PhotosViewModel @Inject constructor(
     }
 
     fun refresh() {
-        dataSourceFactory.photosDataSourceLiveData.value!!.invalidate()
+        // dataSourceFactory.photosDataSourceLiveData.value!!.invalidate()
     }
 
 }
