@@ -1,5 +1,5 @@
 # Pixabay
-Photo list with MVVM(Google Component Architecture), Rxjava, Dagger2, and Kotlin.
+Simple Photo list application retriving pictures from Pixabay site 
  
 <ul>
 <li>The application supports both portrait and landscape mode </li>
@@ -11,10 +11,12 @@ Photo list with MVVM(Google Component Architecture), Rxjava, Dagger2, and Kotlin
 
 <h2>What is used in project? </h2>
 <ol>
+ <li><strong>Kotlin</strong></li>
 <li><strong>Clean Architecture</strong>: An app using layered architecture based on <a href="http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" rel="nofollow">Clean Architecture by Uncle Bob</a>.</li>
 <li><strong>Retrofit</strong>: To retrive data from the network</li>
-<li><strong>Architecture components</strong>: LiveData and ViewModel</li>
-<li><strong>Kotlin</strong></li>
+<li><strong>Architecture components and using MVVM</strong>: LiveData and ViewModel</li>
+<li><strong>Paging library</strong>: Using PagedList to fetch more data from network.</li>
+<li><strong> Navigation component</strong>: At last it's settled, single activity is what's Google recommend now. Navigation editor make things easy for us to design navigation path of our app.</li>
 <li><strong>Dagger 2</strong>: Using Dependency injection to manage the dependencies in an optimal way.</li>
 <li><strong>Glide</strong>: To view images from network </li>
 </ol>
