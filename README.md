@@ -1,5 +1,5 @@
-# Pixabay
-A Simple Photo list application retriving pictures from Pixabay site 
+# Pixabay(MVVM , Paging Infinite Scrolling )
+A Photo list sample that retrives pictures from Pixabay site 
  
 <ul>
 <li>The application supports both portrait and landscape mode </li>
