@@ -8,23 +8,15 @@ import timber.log.Timber
 
 typealias ClickListener = (Models.PhotoResponse) -> Unit
 
-class PhotoAdapter(
-    private val clickListener: ClickListener
-) : PagedListAdapter<Models.PhotoResponse, PhotoViewHolder>(diffCallback) {
-
-//    fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
-//        itemView.setOnClickListener {
-//            event.invoke(adapterPosition, itemViewType)
-//        }
-//        return this
-//    }
+class PhotoAdapter(private val clickListener: ClickListener) :
+    PagedListAdapter<Models.PhotoResponse, PhotoViewHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         Timber.d("Binding view holder at position $position")
         val photo = getItem(position)
 
         with(holder) {
-            bindTo(photo)
+            bind(photo)
             photo?.let {
                 itemView.setOnClickListener {
                     clickListener(photo)
@@ -34,7 +26,7 @@ class PhotoAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder =
-        PhotoViewHolder(parent)
+        PhotoViewHolder.from(parent)
 
     companion object {
         /**

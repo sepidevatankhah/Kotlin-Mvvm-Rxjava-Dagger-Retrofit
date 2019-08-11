@@ -3,6 +3,7 @@ package de.joyn.myapplication.ui.fragments.photos
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
@@ -12,14 +13,12 @@ import de.joyn.myapplication.R
 import de.joyn.myapplication.network.dto.Models
 import kotlinx.android.synthetic.main.item_photo.view.*
 
-class PhotoViewHolder(containerView: ViewGroup) : RecyclerView.ViewHolder(
-    LayoutInflater.from(containerView.context).inflate(R.layout.item_photo, containerView, false)
-) {
+class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     /**
      * Items might be null if they are not paged in yet. PagedListAdapter will re-bind the
      * ViewHolder when Item is loaded.
      */
-    fun bindTo(photo: Models.PhotoResponse?) {
+    fun bind(photo: Models.PhotoResponse?) {
         if (photo != null) {
             with(photo) {
                 var imgUrl = previewImageUrl
@@ -41,4 +40,15 @@ class PhotoViewHolder(containerView: ViewGroup) : RecyclerView.ViewHolder(
             }
         }
     }
+
+    companion object {
+        fun from(parent: ViewGroup): PhotoViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val view = layoutInflater
+                .inflate(R.layout.item_photo, parent, false)
+
+            return PhotoViewHolder(view)
+        }
+    }
+
 }

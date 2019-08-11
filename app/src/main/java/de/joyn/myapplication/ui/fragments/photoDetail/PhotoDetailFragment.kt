@@ -1,17 +1,15 @@
 package de.joyn.myapplication.ui.fragments.photoDetail
 
 import androidx.core.net.toUri
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.joyn.myapplication.R
-import de.joyn.myapplication.ui.base.BaseDaggerFragment
-import de.joyn.myapplication.ui.fragments.photos.PhotosViewModel
+import de.joyn.myapplication.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_photo.*
 
-class PhotoDetailFragment : BaseDaggerFragment<PhotoDetailState, PhotoDetailViewModel>() {
+class PhotoDetailFragment : BaseFragment<Boolean, PhotoDetailViewModel>() {
 
-    override fun handleState(state: Any?) {
+    override fun handleState(state: Boolean) {
     }
 
     override fun getLayout(): Int =

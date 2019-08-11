@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -14,13 +13,13 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.joyn.myapplication.R
 import de.joyn.myapplication.network.dto.Models
-import de.joyn.myapplication.ui.base.BaseDaggerFragment
+import de.joyn.myapplication.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 import timber.log.Timber
 
-class PhotosFragment : BaseDaggerFragment<PhotosViewState,PhotosViewModel>(), SearchView.OnQueryTextListener {
+class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>,PhotosViewModel>(), SearchView.OnQueryTextListener {
 
-    override fun handleState(state: Any?) {
+    override fun handleState(state: PagedList<Models.PhotoResponse>) {
         render(state as PagedList<Models.PhotoResponse>);
     }
 
@@ -103,8 +102,8 @@ class PhotosFragment : BaseDaggerFragment<PhotosViewState,PhotosViewModel>(), Se
         if (newText!!.trim().replace(" ", "").length >= 3 || newText!!.isEmpty()) {
             viewModel.cachedFilter = newText
             viewModel.setFilter(newText!!)
-            //viewModel.recreatePhotoList()
-            //startObserving()
+            viewModel.createLiveData()
+            startObserving()
 
         }
         return true
