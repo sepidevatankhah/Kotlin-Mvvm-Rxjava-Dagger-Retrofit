@@ -6,24 +6,23 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.android.support.AndroidSupportInjection
 import de.joyn.myapplication.R
 import de.joyn.myapplication.network.dto.Models
-import de.joyn.myapplication.ui.base.BaseFragment
+import de.joyn.myapplication.ui.base.BaseDaggerFragment
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 import timber.log.Timber
-import javax.inject.Inject
 
-class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextListener {
+class PhotosFragment : BaseDaggerFragment<PhotosViewState,PhotosViewModel>(), SearchView.OnQueryTextListener {
 
+    override fun handleState(state: Any?) {
+        render(state as PagedList<Models.PhotoResponse>);
+    }
 
     private val clickListener: ClickListener = this::onPhotoClicked
 
@@ -39,14 +38,8 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
         }
     }
 
-    @Inject
-    lateinit var photosViewModelFactory: PhotosViewModelFactory
-
     private val photoListAdapter = PhotoAdapter(clickListener)
 
-    override fun injectDependencies(fragment: Fragment) {
-        AndroidSupportInjection.inject(this)
-    }
 
     override fun getLayout(): Int {
         return R.layout.fragment_photo_list
@@ -54,26 +47,12 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
 
     override fun onCreateCompleted() {
         initRecyclerView()
-        createViewModel()
+        createViewModel(PhotosViewModel::class.java)
         //set default value for searchView
         viewModel.setFilter(getString(R.string.search_filter_default_value))
 
     }
 
-    private fun createViewModel() {
-        viewModel = ViewModelProviders.of(this, photosViewModelFactory).get(PhotosViewModel::class.java)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        startObserving()
-    }
-
-    private fun startObserving() {
-        viewModel.getPhotoList().observe(this, Observer { pagedPhotoList ->
-            pagedPhotoList?.let { render(pagedPhotoList) }
-        })
-    }
 
     private fun render(pagedPhotoList: PagedList<Models.PhotoResponse>) {
         photoListAdapter.submitList(pagedPhotoList)
@@ -88,6 +67,7 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
         }
 
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -123,8 +103,8 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(), SearchView.OnQueryTextLi
         if (newText!!.trim().replace(" ", "").length >= 3 || newText!!.isEmpty()) {
             viewModel.cachedFilter = newText
             viewModel.setFilter(newText!!)
-            viewModel.recreatePhotoList()
-            startObserving()
+            //viewModel.recreatePhotoList()
+            //startObserving()
 
         }
         return true

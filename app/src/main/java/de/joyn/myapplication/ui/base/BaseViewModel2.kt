@@ -1,12 +1,13 @@
 package de.joyn.myapplication.ui.base
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseViewModel2<S> : ViewModel() {
+abstract class BaseViewModel2<S, M> : ViewModel() {
 
-    var stateLiveData: MutableLiveData<S> = MutableLiveData()
+    var stateLiveData: LiveData<M> = MutableLiveData()
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

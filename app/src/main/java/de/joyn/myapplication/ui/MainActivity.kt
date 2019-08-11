@@ -9,15 +9,16 @@ import androidx.navigation.ui.NavigationUI
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.HasSupportFragmentInjector
 import de.joyn.myapplication.R
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() , HasSupportFragmentInjector {
-    private lateinit var appBarConfiguration : AppBarConfiguration
-    @Inject
-    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentDispatchingAndroidInjector
+class MainActivity : DaggerAppCompatActivity() {
+    //private lateinit var appBarConfiguration : AppBarConfiguration
+//    @Inject
+//    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+//    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentDispatchingAndroidInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

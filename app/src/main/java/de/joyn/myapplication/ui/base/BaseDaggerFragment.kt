@@ -6,31 +6,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
-import io.reactivex.disposables.CompositeDisposable
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
 import de.joyn.myapplication.di.viewmodel.ViewModelFactory
-import de.joyn.myapplication.ui.MainActivity
-import de.joyn.myapplication.ui.fragments.photoDetail.PhotoDetailViewModel
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-
-abstract class BaseFragment<VM : BaseViewModel> : DaggerFragment() {
+abstract class BaseDaggerFragment<S : BaseViewState, VM  : BaseViewModel2<S, *>> : DaggerFragment() {
 
     @Inject
+    //@JvmField
     lateinit var viewModelFactory: ViewModelFactory
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    val compositDesposable: CompositeDisposable = CompositeDisposable()
+
+
     protected lateinit var viewModel: VM
 
     override fun onAttach(context: Context) {
-        //injectDependencies(this)
         super.onAttach(context)
     }
 
-   // abstract fun injectDependencies(fragment: Fragment)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
@@ -44,29 +45,42 @@ abstract class BaseFragment<VM : BaseViewModel> : DaggerFragment() {
         onCreateCompleted();
     }
 
-    @LayoutRes
-    abstract fun getLayout(): Int
-
-
     /**
      * add your code here evry thing injected and view
      */
     protected abstract fun onCreateCompleted()
 
 
+    @LayoutRes
+    abstract fun getLayout(): Int
+
+    override fun onStart() {
+        super.onStart()
+        startObserving()
+    }
+
     override fun onDestroy() {
-        compositeDisposable.clear()
+        compositDesposable.clear()
         super.onDestroy()
     }
 
-    protected fun createViewModel(clazz: Class<VM>) {
+
+    fun createViewModel(clazz: Class<VM>) {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(clazz)
     }
+
 
     fun showToast(@StringRes string: Int) {
         if (string != 0)
             Toast.makeText(activity, getString(string), Toast.LENGTH_LONG).show()
     }
+
+
+    private fun startObserving() {
+        viewModel.stateLiveData.observe(this, Observer { state -> handleState(state) })
+    }
+
+    abstract fun handleState(state: Any?);
 
     fun showMessage(message: String) = Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
 }

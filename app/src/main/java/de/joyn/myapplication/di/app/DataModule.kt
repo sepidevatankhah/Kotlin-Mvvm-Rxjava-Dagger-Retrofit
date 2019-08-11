@@ -19,7 +19,9 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import okhttp3.logging.HttpLoggingInterceptor
 
-
+/**
+ * Module which provides all required dependencies about network and data
+ */
 @Module
 object DataModule {
 
