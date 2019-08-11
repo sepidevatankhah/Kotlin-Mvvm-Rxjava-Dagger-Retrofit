@@ -22,7 +22,7 @@ import org.junit.Rule
 
 
 //class PhotoListViewModelTest@Inject constructor(private val getFlowerUseCase: GetPhotoUseCase) :
-//    BaseViewModel2<PhotoListViewState>() {
+//    BaseViewModel<PhotoListViewState>() {
 class PhotoListViewModelTest {
 
     @Rule
