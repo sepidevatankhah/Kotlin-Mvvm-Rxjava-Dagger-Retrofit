@@ -10,17 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.joyn.myapplication.R
+import de.joyn.myapplication.databinding.ItemPhotoBinding
 import de.joyn.myapplication.network.dto.Models
 import kotlinx.android.synthetic.main.item_photo.view.*
 
-class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    /**
-     * Items might be null if they are not paged in yet. PagedListAdapter will re-bind the
-     * ViewHolder when Item is loaded.
-     */
+class PhotoViewHolder private constructor(private val binding: ItemPhotoBinding) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(photo: Models.PhotoResponse?) {
         if (photo != null) {
             with(photo) {
+                var imgPreview = binding.imgPreview
                 var imgUrl = previewImageUrl
                 val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
                 itemView.apply {
@@ -32,10 +31,10 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                                 .error(R.drawable.ic_broken_image)
                         )
                         .into(imgPreview)
-                    txtLikes.text = likeNumber
-                    txtDownload.text = downloadNumber
-                    txtUserName.text = userName
-                    txtView.text = viewNumber
+                    binding.txtLikes.text = likeNumber
+                    binding.txtDownload.text = downloadNumber
+                    binding.txtUserName.text = userName
+                    binding.txtView.text = viewNumber
                 }
             }
         }
@@ -44,10 +43,8 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     companion object {
         fun from(parent: ViewGroup): PhotoViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val view = layoutInflater
-                .inflate(R.layout.item_photo, parent, false)
-
-            return PhotoViewHolder(view)
+            val binding = ItemPhotoBinding.inflate(layoutInflater, parent, false)
+            return PhotoViewHolder(binding)
         }
     }
 

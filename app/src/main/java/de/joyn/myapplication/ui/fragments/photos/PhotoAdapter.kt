@@ -30,8 +30,10 @@ class PhotoAdapter(private val clickListener: ClickListener) :
 
     companion object {
         /**
-         * This diff callback informs the PagedListAdapter how to compute list differences when new
-         * PagedLists arrive.
+         * Callback for calculating the diff between two non-null items in a list.
+         *
+         * Used by ListAdapter or PagedListAdapter to calculate the minumum number of changes between and old list and a new
+         * list that's been passed to `submitList`.
          */
         private val diffCallback = object : DiffUtil.ItemCallback<Models.PhotoResponse>() {
             override fun areItemsTheSame(oldItem: Models.PhotoResponse, newItem: Models.PhotoResponse): Boolean =

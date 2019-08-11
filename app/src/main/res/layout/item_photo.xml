@@ -1,91 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="wrap_content"
-                                                   android:id="@+id/flower_container">
-
-    <ImageView
-            android:id="@+id/imgPreview"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_background"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/imgView"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            app:srcCompat="@drawable/round_remove_red_eye_24"
-            android:id="@+id/imgView"
-            app:layout_constraintStart_toEndOf="@+id/imgPreview"
-            android:layout_marginStart="8dp"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/txtView"
-            android:contentDescription="@string/views"
-            app:layout_constraintBottom_toBottomOf="@+id/imgPreview" android:layout_marginBottom="8dp"
-    />
-    <TextView
-            tools:text="2500"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtView"
-            app:layout_constraintStart_toEndOf="@+id/imgView"
-            app:layout_constraintBottom_toBottomOf="@+id/imgView" android:layout_marginStart="8dp"
-            android:fontFamily="cursive"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/baseline_cloud_download_24"
-            android:id="@+id/imgDownload"
-            app:layout_constraintStart_toEndOf="@+id/txtView"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/txtDownload"
-            android:contentDescription="@string/downloads"
-            app:layout_constraintBottom_toBottomOf="@+id/txtView" android:layout_marginStart="16dp"/>
-    <TextView
-            tools:text="1390"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtDownload"
-            app:layout_constraintStart_toEndOf="@+id/imgDownload"
-            app:layout_constraintBottom_toBottomOf="@+id/imgDownload" android:layout_marginStart="8dp"
-            android:fontFamily="cursive"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/round_thumb_up_24"
-            android:id="@+id/imgLike"
-            android:contentDescription="@string/likes"
-            app:layout_constraintStart_toStartOf="@+id/imgView"
-            android:layout_marginBottom="3dp" app:layout_constraintBottom_toTopOf="@+id/imgView"/>
-    <TextView
-            tools:text="23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtLikes"
-            app:layout_constraintStart_toEndOf="@+id/imgLike"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imgLike" android:fontFamily="cursive"/>
-    <TextView
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="24sp"
-            tools:text="Sepideh Vatankhah"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtUserName"
-            app:layout_constraintTop_toTopOf="@+id/imgPreview"
-            app:layout_constraintBottom_toTopOf="@+id/imgLike" app:layout_constraintVertical_bias="0.43"
-            app:layout_constraintStart_toStartOf="@+id/imgLike"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:fontFamily="cursive" android:textStyle="bold"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="photo"
+                  type="de.joyn.myapplication.network.dto.Models.PhotoResponse"/>
 
 
-    <!--tools:src="@tools:sample/backgrounds/scenic"-->
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/flower_container">
+
+        <ImageView
+                android:id="@+id/imgPreview"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_launcher_background"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toStartOf="@+id/imgView"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                app:srcCompat="@drawable/round_remove_red_eye_24"
+                android:id="@+id/imgView"
+                app:layout_constraintStart_toEndOf="@+id/imgPreview"
+                android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toStartOf="@+id/txtView"
+                android:contentDescription="@string/views"
+                app:layout_constraintBottom_toBottomOf="@+id/imgPreview" android:layout_marginBottom="8dp"
+        />
+        <TextView
+                tools:text="2500"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtView"
+                app:layout_constraintStart_toEndOf="@+id/imgView"
+                app:layout_constraintBottom_toBottomOf="@+id/imgView" android:layout_marginStart="8dp"
+                android:fontFamily="cursive"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_cloud_download_24"
+                android:id="@+id/imgDownload"
+                app:layout_constraintStart_toEndOf="@+id/txtView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toStartOf="@+id/txtDownload"
+                android:contentDescription="@string/downloads"
+                app:layout_constraintBottom_toBottomOf="@+id/txtView" android:layout_marginStart="16dp"/>
+        <TextView
+                tools:text="1390"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDownload"
+                app:layout_constraintStart_toEndOf="@+id/imgDownload"
+                app:layout_constraintBottom_toBottomOf="@+id/imgDownload" android:layout_marginStart="8dp"
+                android:fontFamily="cursive"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/round_thumb_up_24"
+                android:id="@+id/imgLike"
+                android:contentDescription="@string/likes"
+                app:layout_constraintStart_toStartOf="@+id/imgView"
+                android:layout_marginBottom="3dp" app:layout_constraintBottom_toTopOf="@+id/imgView"/>
+        <TextView
+                tools:text="23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtLikes"
+                app:layout_constraintStart_toEndOf="@+id/imgLike"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgLike" android:fontFamily="cursive"/>
+        <TextView
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp"
+                tools:text="Sepideh Vatankhah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtUserName"
+                app:layout_constraintTop_toTopOf="@+id/imgPreview"
+                app:layout_constraintBottom_toTopOf="@+id/imgLike" app:layout_constraintVertical_bias="0.43"
+                app:layout_constraintStart_toStartOf="@+id/imgLike"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:fontFamily="cursive" android:textStyle="bold"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!--tools:src="@tools:sample/backgrounds/scenic"-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
