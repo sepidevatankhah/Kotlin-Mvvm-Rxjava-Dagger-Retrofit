@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerFragment
@@ -18,7 +19,6 @@ import javax.inject.Inject
 abstract class BaseFragment<M, VM  : BaseViewModel<M>> : DaggerFragment() {
 
     @Inject
-    //@JvmField
     lateinit var viewModelFactory: ViewModelFactory
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -30,13 +30,9 @@ abstract class BaseFragment<M, VM  : BaseViewModel<M>> : DaggerFragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
-
-        return inflater.inflate(getLayout(), container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
         onCreateCompleted();

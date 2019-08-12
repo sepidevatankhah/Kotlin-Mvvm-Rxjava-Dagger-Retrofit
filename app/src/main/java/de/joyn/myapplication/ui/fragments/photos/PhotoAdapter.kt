@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import de.joyn.myapplication.network.dto.Models
 import timber.log.Timber
 
+//Type aliases provide alternative names for existing types
 typealias ClickListener = (Models.PhotoResponse) -> Unit
 
 class PhotoAdapter(private val clickListener: ClickListener) :
     PagedListAdapter<Models.PhotoResponse, PhotoViewHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-        Timber.d("Binding view holder at position $position")
         val photo = getItem(position)
 
         with(holder) {
@@ -34,6 +34,9 @@ class PhotoAdapter(private val clickListener: ClickListener) :
          *
          * Used by ListAdapter or PagedListAdapter to calculate the minumum number of changes between and old list and a new
          * list that's been passed to `submitList`.
+         *
+         *
+         * DiffUtils use Myers diff algorithm to efficiently figure out the smallest number of changes needed to update
          */
         private val diffCallback = object : DiffUtil.ItemCallback<Models.PhotoResponse>() {
             override fun areItemsTheSame(oldItem: Models.PhotoResponse, newItem: Models.PhotoResponse): Boolean =

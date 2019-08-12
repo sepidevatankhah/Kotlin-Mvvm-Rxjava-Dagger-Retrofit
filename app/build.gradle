@@ -30,7 +30,10 @@ android {
         }
     }
 
-    // Enables data binding.
+    // Enables data binding:
+    //{Binding components in the layout file lets you remove many UI framework calls in your activities and fragments,
+    // making them simpler and easier to maintain.
+    // This can also improve your app's performance and help prevent memory leaks and null pointer exceptions.}
     dataBinding {
         enabled = true
     }

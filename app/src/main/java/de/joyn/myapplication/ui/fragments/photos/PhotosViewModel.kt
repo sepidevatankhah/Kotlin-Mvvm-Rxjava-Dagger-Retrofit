@@ -32,17 +32,6 @@ class PhotosViewModel @Inject constructor(
             .build()
         this.stateLiveData = LivePagedListBuilder(dataSourceFactory, pagedListConfig).build();
     }
-//
-//    fun getPhotoList(): LiveData<PagedList<Models.PhotoResponse>> {
-//        return photoList
-//    }
-//
-//    fun recreatePhotoList() {
-//        photoList = LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
-//    }
-//
-//    fun refresh() {
-//        // dataSourceFactory.photosDataSourceLiveData.value!!.invalidate()
-//    }
+
 
 }

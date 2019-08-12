@@ -2,22 +2,24 @@ package de.joyn.myapplication.ui.fragments.photos
 
 import android.app.SearchManager
 import android.content.Context
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.os.Bundle
+import android.view.*
 import android.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.joyn.myapplication.R
+import de.joyn.myapplication.databinding.FragmentPhotoListBinding
 import de.joyn.myapplication.network.dto.Models
 import de.joyn.myapplication.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 import timber.log.Timber
 
-class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>,PhotosViewModel>(), SearchView.OnQueryTextListener {
+class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>, PhotosViewModel>(),
+    SearchView.OnQueryTextListener {
 
     override fun handleState(state: PagedList<Models.PhotoResponse>) {
         render(state as PagedList<Models.PhotoResponse>);
@@ -40,12 +42,19 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>,PhotosViewMo
     private val photoListAdapter = PhotoAdapter(clickListener)
 
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+        val binding = DataBindingUtil.inflate<FragmentPhotoListBinding>(inflater, getLayout(), container, false)
+        initRecyclerView(binding)
+        return binding.root
+    }
+
     override fun getLayout(): Int {
         return R.layout.fragment_photo_list
     }
 
     override fun onCreateCompleted() {
-        initRecyclerView()
+
         createViewModel(PhotosViewModel::class.java)
         //set default value for searchView
         viewModel.setFilter(getString(R.string.search_filter_default_value))
@@ -58,8 +67,8 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>,PhotosViewMo
         Timber.d("pagedPhotoList : %s", pagedPhotoList)
     }
 
-    private fun initRecyclerView() {
-        recyclerView.apply {
+    private fun initRecyclerView(binding: FragmentPhotoListBinding) {
+        binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = photoListAdapter

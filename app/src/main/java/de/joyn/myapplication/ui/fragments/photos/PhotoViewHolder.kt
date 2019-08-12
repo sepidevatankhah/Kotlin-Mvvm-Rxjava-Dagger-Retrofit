@@ -14,30 +14,12 @@ import de.joyn.myapplication.databinding.ItemPhotoBinding
 import de.joyn.myapplication.network.dto.Models
 import kotlinx.android.synthetic.main.item_photo.view.*
 
-class PhotoViewHolder private constructor(private val binding: ItemPhotoBinding) : RecyclerView.ViewHolder(binding.root) {
+class PhotoViewHolder private constructor(private val binding: ItemPhotoBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(photo: Models.PhotoResponse?) {
-        if (photo != null) {
-            with(photo) {
-                var imgPreview = binding.imgPreview
-                var imgUrl = previewImageUrl
-                val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-                itemView.apply {
-                    Glide.with(imgPreview.context)
-                        .load(imgUri)
-                        .apply(
-                            RequestOptions()
-                                .placeholder(R.drawable.loading_animation)
-                                .error(R.drawable.ic_broken_image)
-                        )
-                        .into(imgPreview)
-                    binding.txtLikes.text = likeNumber
-                    binding.txtDownload.text = downloadNumber
-                    binding.txtUserName.text = userName
-                    binding.txtView.text = viewNumber
-                }
-            }
-        }
+        binding.photo = photo
+        binding.executePendingBindings()
     }
 
     companion object {

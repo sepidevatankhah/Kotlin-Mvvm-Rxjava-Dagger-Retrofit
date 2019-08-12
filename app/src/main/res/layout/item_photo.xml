@@ -13,6 +13,7 @@
             android:id="@+id/flower_container">
 
         <ImageView
+                app:imgPreview="@{photo}"
                 android:id="@+id/imgPreview"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/imgPreview" android:layout_marginBottom="8dp"
         />
         <TextView
+                app:txtView="@{photo}"
                 tools:text="2500"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +57,7 @@
                 android:contentDescription="@string/downloads"
                 app:layout_constraintBottom_toBottomOf="@+id/txtView" android:layout_marginStart="16dp"/>
         <TextView
+                app:txtDownload="@{photo}"
                 tools:text="1390"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,6 +74,7 @@
                 app:layout_constraintStart_toStartOf="@+id/imgView"
                 android:layout_marginBottom="3dp" app:layout_constraintBottom_toTopOf="@+id/imgView"/>
         <TextView
+                app:txtLikes="@{photo}"
                 tools:text="23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,6 +83,7 @@
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgLike" android:fontFamily="cursive"/>
         <TextView
+                app:txtUserName="@{photo}"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="24sp"
                 tools:text="Sepideh Vatankhah"
