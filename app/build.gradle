@@ -50,7 +50,7 @@ dependencies {
 
     // Support libraries
     implementation "androidx.appcompat:appcompat:$version_core"
-    implementation "androidx.fragment:fragment:$version_fragment"
+    implementation "androidx.fragment:fragment-ktx:$version_fragment"
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
 
     //implementation "com.android.support:recyclerview-v7:$version_recyclerview"
@@ -82,7 +82,6 @@ dependencies {
 
     //Lifecycle dependencies
     implementation "android.arch.lifecycle:extensions:$version_lifecycle_extensions"
-    implementation "android.arch.lifecycle:viewmodel:$version_lifecycle_extensions"
     implementation "android.arch.paging:runtime:$version_lifecycle_extensions"
 
     // Glide
@@ -95,7 +94,10 @@ dependencies {
     // Testing
     testImplementation 'junit:junit:4.12'
     testImplementation "android.arch.core:core-testing:1.1.1"
-    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+
+    //testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+    //The Inline Mockito dependency allows us to mock final classes
+    testImplementation 'org.mockito:mockito-inline:2.11.0'
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'

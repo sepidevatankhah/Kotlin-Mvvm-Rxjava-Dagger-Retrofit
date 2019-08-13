@@ -21,13 +21,15 @@ buildscript {
         version_rxjava ="2.2.6"
         version_rxandroid = "2.1.1"
         version_navigation = "2.1.0-beta02"
+        version_fragment = "1.2.0-alpha01"
+        version_gradle = '3.4.2'
     }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath "com.android.tools.build:gradle:$version_gradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath 'android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0'
     }

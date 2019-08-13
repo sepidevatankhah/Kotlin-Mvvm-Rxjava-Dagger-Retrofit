@@ -2,10 +2,6 @@ package de.joyn.myapplication.ui.photoList
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.times
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
 import de.joyn.myapplication.RxImmediateSchedulerRule
 import de.joyn.myapplication.domain.executer.PostExecutionThread
 import de.joyn.myapplication.domain.executer.UseCaseExecutor
