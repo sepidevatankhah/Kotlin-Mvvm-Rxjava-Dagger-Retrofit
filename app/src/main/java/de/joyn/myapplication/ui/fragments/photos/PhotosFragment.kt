@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -15,17 +16,16 @@ import de.joyn.myapplication.R
 import de.joyn.myapplication.databinding.FragmentPhotoListBinding
 import de.joyn.myapplication.network.dto.Models
 import de.joyn.myapplication.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_photo_list.*
 import timber.log.Timber
 
 class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>, PhotosViewModel>(),
     SearchView.OnQueryTextListener {
 
     override fun handleState(state: PagedList<Models.PhotoResponse>) {
+        Timber.d("pagedList : %s", state)
         render(state)
     }
 
-    private val clickListener: ClickListener = this::onPhotoClicked
 
     private fun onPhotoClicked(photo: Models.PhotoResponse) {
         view?.let {
@@ -39,13 +39,35 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>, PhotosViewM
         }
     }
 
-    private val photoListAdapter = PhotoAdapter(clickListener)
+    private lateinit var photoListAdapter: PhotoAdapter
 
-
+    /**
+     * Called when the Fragment is ready to display content to the screen.
+     *
+     * This function uses DataBindingUtil to inflate R.layout.fragment_photo_list.
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
+
         val binding = DataBindingUtil.inflate<FragmentPhotoListBinding>(inflater, getLayout(), container, false)
+
+        createViewModel(PhotosViewModel::class.java)
+
+        binding.photoList = viewModel
+        binding.lifecycleOwner = this
+
+        //set default value for searchView
+        viewModel.setFilter(getString(R.string.search_filter_default_value))
+
+
         initRecyclerView(binding)
+
+        viewModel.navigateToPhotoDetail.observe(this, Observer { photo ->
+            photo?.let {
+                onPhotoClicked(photo)
+                viewModel.onPhotoDetailNavigated()
+            }
+        })
         return binding.root
     }
 
@@ -54,11 +76,6 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>, PhotosViewM
     }
 
     override fun onCreateCompleted() {
-
-        createViewModel(PhotosViewModel::class.java)
-        //set default value for searchView
-        viewModel.setFilter(getString(R.string.search_filter_default_value))
-
     }
 
 
@@ -71,6 +88,9 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>, PhotosViewM
         binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
+            photoListAdapter = PhotoAdapter(PhotoClickListener { photo ->
+                viewModel.onPhotoClicked(photo)
+            })
             adapter = photoListAdapter
         }
 
