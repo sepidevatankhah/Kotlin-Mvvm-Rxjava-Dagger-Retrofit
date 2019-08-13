@@ -22,7 +22,7 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>, PhotosViewM
     SearchView.OnQueryTextListener {
 
     override fun handleState(state: PagedList<Models.PhotoResponse>) {
-        render(state as PagedList<Models.PhotoResponse>);
+        render(state)
     }
 
     private val clickListener: ClickListener = this::onPhotoClicked

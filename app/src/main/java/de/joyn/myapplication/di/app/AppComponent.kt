@@ -10,6 +10,7 @@ import de.joyn.myapplication.App
 import de.joyn.myapplication.di.viewmodel.ViewModelModule
 import javax.inject.Singleton
 
+//The AppComponent above binds the Application class to the AppModule, DataModule
 @Singleton
 @Component(
     modules = [AppModule::class,

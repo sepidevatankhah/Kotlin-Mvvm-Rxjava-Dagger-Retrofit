@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 sealed class Models {
 
-    data class BasePhoto(@SerializedName("totalHits") val totalHits: Int,
-                         @SerializedName("total") val total: Int,
-                         @SerializedName("hits") val response: List<PhotoResponse>
+    data class BasePhoto(@SerializedName("totalHits") val totalHits: Int= 0,
+                         @SerializedName("total") val total: Int =0,
+                         @SerializedName("hits") val hits: List<PhotoResponse> = ArrayList()
                       )
 
     data class PhotoResponse(@SerializedName("id") val id: String ="",
