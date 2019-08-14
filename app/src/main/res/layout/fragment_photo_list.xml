@@ -4,13 +4,18 @@
 <layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+        <variable name="photoList"
+                  type="de.joyn.myapplication.ui.fragments.photos.PhotosViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent" android:layout_height="match_parent"
             tools:context="de.joyn.myapplication.ui.fragments.photos.PhotosFragment">
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:padding="@dimen/list_padding"
                 android:clipToPadding="false"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -18,6 +23,17 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-    </LinearLayout>
+        <!--<ImageView-->
+                <!--android:visibility="invisible"-->
+                <!--android:id="@+id/status_image"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:apiStatus="@{photoList.status}" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

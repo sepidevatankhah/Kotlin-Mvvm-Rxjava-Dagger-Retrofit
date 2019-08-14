@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Data to make available to the XML via data binding. In this case,
+       the whole ViewModel, so that we can access the LiveData,
+       click handlers, and state variables. -->
+    <data>
+        <variable name="photoDetail"
+                  type="de.joyn.myapplication.ui.fragments.photoDetail.PhotoDetailViewModel"/>
+    </data>
+
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -20,7 +28,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@tools:sample/backgrounds/scenic"/>
-
+            <!--app:imgLargePhoto="@{photoDetail.imgLargePhoto}"-->
             <TextView
                     android:id="@+id/txtUserName"
                     android:layout_width="wrap_content"
@@ -30,6 +38,7 @@
                     android:textSize="60sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imgLargePhoto"
+                    android:text="@{photoDetail.userName}"
                     tools:text="To Rent" android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textStyle="bold" android:fontFamily="cursive"/>
 
@@ -42,6 +51,7 @@
                     android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtUserName"
+                    android:text="@{photoDetail.tags}"
                     tools:text="$100,000" android:fontFamily="cursive"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

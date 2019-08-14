@@ -25,11 +25,6 @@ abstract class BaseFragment<M, VM  : BaseViewModel<M>> : DaggerFragment() {
 
     protected lateinit var viewModel: VM
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -57,7 +52,7 @@ abstract class BaseFragment<M, VM  : BaseViewModel<M>> : DaggerFragment() {
         super.onDestroy()
     }
 
-
+    //Create and Get the viewmodel
     fun createViewModel(clazz: Class<VM>) {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(clazz)
     }

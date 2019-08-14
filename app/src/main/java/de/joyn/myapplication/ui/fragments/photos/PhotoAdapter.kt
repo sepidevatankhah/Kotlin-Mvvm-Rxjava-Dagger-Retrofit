@@ -4,25 +4,18 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import de.joyn.myapplication.network.dto.Models
-import timber.log.Timber
 
-//Type aliases provide alternative names for existing types
-typealias ClickListener = (Models.PhotoResponse) -> Unit
 
-class PhotoAdapter(private val clickListener: ClickListener) :
+class PhotoClickListener(val clickListener: (photo: Models.PhotoResponse) -> Unit) {
+    fun onClick(photo: Models.PhotoResponse) = clickListener(photo)
+}
+
+class PhotoAdapter(private val clickListener: PhotoClickListener) :
     PagedListAdapter<Models.PhotoResponse, PhotoViewHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val photo = getItem(position)
-
-        with(holder) {
-            bind(photo)
-            photo?.let {
-                itemView.setOnClickListener {
-                    clickListener(photo)
-                }
-            }
-        }
+        holder.bind(photo, clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder =

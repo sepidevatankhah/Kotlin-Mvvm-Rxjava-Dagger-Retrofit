@@ -1,5 +1,6 @@
 package de.joyn.myapplication.domain.dataSource
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PositionalDataSource
 import de.joyn.myapplication.domain.interactor.GetPhotoUseCase
 import de.joyn.myapplication.network.dto.Models
@@ -9,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 
-
+enum class ApiStatus { LOADING, ERROR, DONE }
 class PhotoPositionalDataSource @Inject constructor(
     private val getPhotoUseCase: GetPhotoUseCase
 ) : PositionalDataSource<Models.PhotoResponse>(), Disposable {
@@ -45,17 +46,27 @@ class PhotoPositionalDataSource @Inject constructor(
 
     }
 
+     var _status: ApiStatus = ApiStatus.DONE
+
+    fun getStatus(): ApiStatus {
+        return this._status
+    }
+
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Models.PhotoResponse>) {
         val totalCount = 20000
+        //_status = ApiStatus.LOADING
         val position = computeInitialLoadPosition(params, totalCount)
         val loadSize = computeInitialLoadSize(params, position, totalCount)
 
         val pageNum = position / loadSize + 1
-        val disposable = getPhotoUseCase.execute(PhotoModel(filter, loadSize, pageNum)).subscribe({ response ->
-            callback.onResult(response.hits, position, response.total)
-        }, { t: Throwable? ->
-            Timber.e(t)
-        })
+        val disposable = getPhotoUseCase.execute(PhotoModel(filter, loadSize, pageNum)).subscribe(
+            { response ->
+               // _status = ApiStatus.DONE
+                callback.onResult(response.hits, position, response.total)
+            }, { t: Throwable? ->
+                //_status = ApiStatus.ERROR
+                Timber.e(t)
+            })
         compositeDisposable.add(disposable)
 
     }

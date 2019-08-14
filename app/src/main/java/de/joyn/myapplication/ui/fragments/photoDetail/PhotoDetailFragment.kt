@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import de.joyn.myapplication.R
 import de.joyn.myapplication.databinding.FragmentPhotoBinding
 import de.joyn.myapplication.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_photo.*
+
 
 class PhotoDetailFragment : BaseFragment<Boolean, PhotoDetailViewModel>() {
 
@@ -21,47 +21,33 @@ class PhotoDetailFragment : BaseFragment<Boolean, PhotoDetailViewModel>() {
     override fun getLayout(): Int =
         R.layout.fragment_photo
 
-   lateinit var binding: FragmentPhotoBinding
+    lateinit var binding: FragmentPhotoBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate<FragmentPhotoBinding>(inflater, getLayout(), container, false)
+        binding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
 
+        createViewModel(PhotoDetailViewModel::class.java)
+
+        // Set the viewmodel for databinding - this allows the bound layout access to all of the
+        // data in the VieWModel
+        binding.photoDetail = viewModel
+
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.lifecycleOwner = this
+        bindBundle()
         return binding.root
     }
 
     override fun onCreateCompleted() {
 
-        createViewModel(PhotoDetailViewModel::class.java)
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        bindBundle()
-    }
-
-//    private fun bindBundle() {
-//        PhotoDetailFragmentArgs.fromBundle(arguments!!).apply {
-//            val imgUri = imageUrl.toUri().buildUpon().scheme("https").build()
-//            //imgLargePhoto.setImageURI(imgUri)
-//            Glide.with(context!!)
-//                .load(imgUri)
-//                .apply(
-//                    RequestOptions()
-//                        .placeholder(R.drawable.loading_animation)
-//                        .error(R.drawable.ic_broken_image)
-//                )
-//                .into(imgLargePhoto)
-//            txtTags.text = tags
-//            txtUserName.text = userName
-//
-//        }
-//    }
 
     private fun bindBundle() {
-        PhotoDetailFragmentArgs.fromBundle(arguments!!).apply {
-            val imgUri = imageUrl.toUri().buildUpon().scheme("https").build()
-            //imgLargePhoto.setImageURI(imgUri)
+        PhotoDetailFragmentArgs.fromBundle(arguments!!)?.let {
+            viewModel.setData(it.tags, it.userName,it.imageUrl)
+            val imgUri = it.imageUrl.toUri().buildUpon().scheme("https").build()
             Glide.with(context!!)
                 .load(imgUri)
                 .apply(
@@ -70,9 +56,6 @@ class PhotoDetailFragment : BaseFragment<Boolean, PhotoDetailViewModel>() {
                         .error(R.drawable.ic_broken_image)
                 )
                 .into(binding.imgLargePhoto)
-            binding.txtTags.text = tags
-            binding.txtUserName.text = userName
-
         }
     }
 

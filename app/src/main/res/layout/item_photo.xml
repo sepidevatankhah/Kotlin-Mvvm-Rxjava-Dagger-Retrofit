@@ -4,12 +4,14 @@
     <data>
         <variable name="photo"
                   type="de.joyn.myapplication.network.dto.Models.PhotoResponse"/>
+        <variable name="clickListener" type="de.joyn.myapplication.ui.fragments.photos.PhotoClickListener"/>
 
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{()-> clickListener.onClick(photo)}"
             android:id="@+id/flower_container">
 
         <ImageView
