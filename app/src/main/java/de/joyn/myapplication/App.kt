@@ -1,10 +1,7 @@
 package de.joyn.myapplication
 
-import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import dagger.android.HasActivityInjector
-import de.joyn.myapplication.di.app.AppComponent
 import de.joyn.myapplication.di.app.DaggerAppComponent
 import timber.log.Timber
 

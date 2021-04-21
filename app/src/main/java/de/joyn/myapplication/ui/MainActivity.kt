@@ -15,10 +15,6 @@ import de.joyn.myapplication.R
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
-    //private lateinit var appBarConfiguration : AppBarConfiguration
-//    @Inject
-//    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
-//    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentDispatchingAndroidInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
