@@ -1,4 +1,4 @@
-# Kotlin-MVVM-Rxjava-Dagger (MVVM , Paging Infinite Scrolling )
+# Kotlin - MVVM - Rxjava - Dagger - Paging Infinite Scrolling
 A Photo list sample that retrieves pictures from Pixabay site
  
 <ul>
