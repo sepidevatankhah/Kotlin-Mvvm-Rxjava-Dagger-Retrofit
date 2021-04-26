@@ -20,7 +20,7 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
         setContentView(R.layout.activity_main)
-        supportActionBar!!.title = getString(R.string.app_name)
+        supportActionBar?.title = getString(R.string.app_name)
 
         val navController = this.findNavController(R.id.nav_host_fragment)
 

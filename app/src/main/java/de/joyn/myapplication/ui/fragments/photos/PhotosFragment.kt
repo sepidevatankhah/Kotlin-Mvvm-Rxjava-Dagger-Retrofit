@@ -17,10 +17,11 @@ import de.joyn.myapplication.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 import timber.log.Timber
 
-class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>,PhotosViewModel>(), SearchView.OnQueryTextListener {
+class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>, PhotosViewModel>(),
+    SearchView.OnQueryTextListener {
 
     override fun handleState(state: PagedList<Models.PhotoResponse>) {
-        render(state as PagedList<Models.PhotoResponse>);
+        render(state)
     }
 
     private val clickListener: ClickListener = this::onPhotoClicked
@@ -67,10 +68,9 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>,PhotosViewMo
 
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.search_menu, menu)
+        inflater.inflate(R.menu.search_menu, menu)
 
         // Get the SearchView and set the searchable configuration
         val searchManager = activity!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -89,8 +89,9 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>,PhotosViewMo
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController())
-                || super.onOptionsItemSelected(item)
+        return view?.findNavController()?.let {
+            NavigationUI.onNavDestinationSelected(item, it) || super.onOptionsItemSelected(item)
+        } ?: false
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -99,9 +100,9 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>,PhotosViewMo
 
     override fun onQueryTextChange(newText: String?): Boolean {
         Timber.d("query : %s", newText)
-        if (newText!!.trim().replace(" ", "").length >= 3 || newText!!.isEmpty()) {
+        if (newText!!.trim().replace(" ", "").length >= 3 || newText.isEmpty()) {
             viewModel.cachedFilter = newText
-            viewModel.setFilter(newText!!)
+            viewModel.setFilter(newText)
             viewModel.createLiveData()
             startObserving()
 
