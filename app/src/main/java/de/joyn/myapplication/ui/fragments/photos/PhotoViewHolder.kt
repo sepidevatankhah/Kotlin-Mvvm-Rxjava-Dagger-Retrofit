@@ -19,10 +19,8 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
      * ViewHolder when Item is loaded.
      */
     fun bind(photo: Models.PhotoResponse?) {
-        if (photo != null) {
-            with(photo) {
-                var imgUrl = previewImageUrl
-                val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+            photo?.apply {
+                val imgUri = previewImageUrl.toUri().buildUpon().scheme("https").build()
                 itemView.apply {
                     Glide.with(imgPreview.context)
                         .load(imgUri)
@@ -38,7 +36,6 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                     txtView.text = viewNumber
                 }
             }
-        }
     }
 
     companion object {

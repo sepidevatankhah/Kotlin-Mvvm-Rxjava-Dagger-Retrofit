@@ -15,7 +15,7 @@ import de.joyn.myapplication.di.viewmodel.ViewModelFactory
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-abstract class BaseFragment<M, VM  : BaseViewModel<M>> : DaggerFragment() {
+abstract class BaseFragment<M, VM : BaseViewModel<M>> : DaggerFragment() {
 
     @Inject
     //@JvmField
@@ -25,12 +25,12 @@ abstract class BaseFragment<M, VM  : BaseViewModel<M>> : DaggerFragment() {
 
     protected lateinit var viewModel: VM
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
 
         return inflater.inflate(getLayout(), container, false)

@@ -9,20 +9,14 @@ import kotlinx.android.synthetic.main.fragment_photo.*
 
 class PhotoDetailFragment : BaseFragment<Boolean, PhotoDetailViewModel>() {
 
-    override fun handleState(state: Boolean) {
-    }
+    override fun handleState(state: Boolean) {}
 
-    override fun getLayout(): Int =
-        R.layout.fragment_photo
+    override fun getLayout(): Int = R.layout.fragment_photo
 
 
     override fun onCreateCompleted() {
         setHasOptionsMenu(true)
         createViewModel(PhotoDetailViewModel::class.java)
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun onResume() {
@@ -31,20 +25,25 @@ class PhotoDetailFragment : BaseFragment<Boolean, PhotoDetailViewModel>() {
     }
 
     private fun bindBundle() {
-        PhotoDetailFragmentArgs.fromBundle(arguments!!).apply {
-            val imgUri = imageUrl.toUri().buildUpon().scheme("https").build()
-            imgLargePhoto.setImageURI(imgUri)
-            Glide.with(context!!)
-                .load(imgUri)
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_broken_image)
-                )
-                .into(imgLargePhoto)
-            txtTags.text = tags
-            txtUserName.text = userName
+        arguments?.apply {
+            PhotoDetailFragmentArgs.fromBundle(this).apply {
+                val imgUri = imageUrl.toUri().buildUpon().scheme("https").build()
+                imgLargePhoto.setImageURI(imgUri)
+                context?.let {
+                    Glide.with(it)
+                        .load(imgUri)
+                        .apply(
+                            RequestOptions()
+                                .placeholder(R.drawable.loading_animation)
+                                .error(R.drawable.ic_broken_image)
+                        )
+                        .into(imgLargePhoto)
+                }
 
+                txtTags.text = tags
+                txtUserName.text = userName
+
+            }
         }
     }
 

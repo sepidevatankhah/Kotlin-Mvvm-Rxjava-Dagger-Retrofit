@@ -99,13 +99,15 @@ class PhotosFragment : BaseFragment<PagedList<Models.PhotoResponse>, PhotosViewM
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        Timber.d("query : %s", newText)
-        if (newText!!.trim().replace(" ", "").length >= 3 || newText.isEmpty()) {
-            viewModel.cachedFilter = newText
-            viewModel.setFilter(newText)
-            viewModel.createLiveData()
-            startObserving()
+        newText?.let { newText ->
+            Timber.d("query : %s", newText)
+            if (newText.trim().replace(" ", "").length >= 3 || newText.isEmpty()) {
+                viewModel.cachedFilter = newText
+                viewModel.setFilter(newText)
+                viewModel.createLiveData()
+                startObserving()
 
+            }
         }
         return true
     }
